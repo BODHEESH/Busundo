@@ -120,7 +120,7 @@ export default function NotificationsPage() {
               No notifications yet
             </p>
             <p className="mt-1 text-xs text-ink/30">
-              We'll notify you when something happens
+              We&apos;ll notify you when something happens
             </p>
           </div>
         )}

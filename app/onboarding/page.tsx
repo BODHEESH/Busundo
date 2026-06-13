@@ -39,7 +39,7 @@ export default function OnboardingPage() {
             Welcome to Busundo!
           </h1>
           <p className="mt-2 text-sm text-ink/60">
-            Let's personalize your experience
+            Let&apos;s personalize your experience
           </p>
         </div>
 

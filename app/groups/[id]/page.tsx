@@ -134,7 +134,7 @@ export default function GroupDetailPage({ params }: { params: { id: string } }) 
           Share this group
         </h2>
         <p className="mb-4 text-xs text-ink/50">
-          Anyone with this link can see the group and join if there's space.
+          Anyone with this link can see the group and join if there&apos;s space.
         </p>
         <div className="flex items-center gap-2 rounded-lg border border-line bg-paper px-3 py-2.5">
           <Link2 className="h-4 w-4 shrink-0 text-ink/40" />

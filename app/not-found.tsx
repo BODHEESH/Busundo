@@ -16,7 +16,7 @@ export default function NotFound() {
           Page not found
         </h2>
         <p className="text-ink/60 mb-8">
-          Looks like this bus route doesn't exist. Let's get you back on track.
+          Looks like this bus route doesn&apos;t exist. Let&apos;s get you back on track.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
