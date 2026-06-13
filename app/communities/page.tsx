@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Users, Plus, MessageSquare, TrendingUp, MapPin } from "lucide-react";
+import PageWrapper from "@/components/shared/PageWrapper";
 
 interface Community {
   _id: string;
@@ -37,22 +38,18 @@ export default function CommunitiesPage() {
   };
 
   return (
-    <main className="min-h-screen bg-paper">
-      <div className="mx-auto max-w-6xl px-4 py-8">
-        {/* Header */}
-        <div className="mb-8 animate-fade-in">
+    <PageWrapper
+      currentPage="communities"
+      title="Communities"
+      description="Join route-based communities and stay connected with fellow travelers"
+      gradient={true}
+    >
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="mb-8">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="font-display text-3xl font-bold tracking-tight">
-                Communities
-              </h1>
-              <p className="mt-2 text-ink/60">
-                Join route communities and stay updated
-              </p>
-            </div>
             <Link
               href="/communities/create"
-              className="flex items-center gap-2 rounded-lg bg-gradient-travel px-4 py-2 text-sm font-medium text-white hover:shadow-lg transition-all"
+              className="flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-600 to-orange-700 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <Plus className="h-4 w-4" />
               Create Community
@@ -69,14 +66,14 @@ export default function CommunitiesPage() {
 
         {/* Communities Grid */}
         {!loading && (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 animate-slide-in-up">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {communities.length === 0 && (
-              <div className="col-span-full text-center py-12 rounded-xl2 border border-line bg-white">
-                <Users className="h-12 w-12 text-ink/20 mx-auto mb-4" />
-                <p className="text-ink/60 mb-4">No communities yet</p>
+              <div className="col-span-full text-center py-16 rounded-2xl border border-gray-200 bg-white shadow-lg">
+                <Users className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-600 mb-6 text-lg">No communities yet</p>
                 <Link
                   href="/communities/create"
-                  className="inline-flex items-center gap-2 text-sm text-transit hover:underline"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-600 to-orange-700 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
                 >
                   <Plus className="h-4 w-4" />
                   Create the first community
@@ -88,35 +85,35 @@ export default function CommunitiesPage() {
               <Link
                 key={community._id}
                 href={`/communities/${community._id}`}
-                className="block rounded-xl2 border border-line bg-white p-6 hover:border-transit transition-all"
+                className="group block rounded-2xl border border-gray-200 bg-white p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1 hover:border-orange-200"
               >
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-transit/10 flex-shrink-0">
-                    <Users className="h-6 w-6 text-transit" />
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-md group-hover:scale-110 transition-transform flex-shrink-0">
+                    <Users className="h-7 w-7" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-display font-bold text-lg truncate">
+                    <h3 className="font-bold text-xl text-gray-900 group-hover:text-orange-600 transition-colors truncate">
                       {community.name}
                     </h3>
                     {community.route && (
-                      <p className="text-sm text-ink/60 flex items-center gap-1 mt-1">
-                        <MapPin className="h-3 w-3" />
+                      <p className="text-sm text-gray-500 flex items-center gap-1 mt-2">
+                        <MapPin className="h-4 w-4" />
                         {community.route.from} ↔ {community.route.to}
                       </p>
                     )}
                   </div>
                 </div>
 
-                <p className="text-sm text-ink/60 mb-4 line-clamp-2">
+                <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed">
                   {community.description}
                 </p>
 
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2 text-ink/60">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-gray-500">
                     <Users className="h-4 w-4" />
-                    <span>{community.membersCount} members</span>
+                    <span className="text-sm font-medium">{community.membersCount} members</span>
                   </div>
-                  <span className="text-xs text-ink/40">
+                  <span className="text-xs text-gray-400">
                     {new Date(community.createdAt).toLocaleDateString()}
                   </span>
                 </div>
@@ -127,8 +124,8 @@ export default function CommunitiesPage() {
 
         {/* Stats */}
         {!loading && communities.length > 0 && (
-          <div className="mt-8 rounded-xl2 border border-line bg-white p-6 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-            <h3 className="font-display font-bold mb-4">Community Stats</h3>
+          <div className="mt-12 rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 mb-6">Community Stats</h3>
             <div className="grid gap-6 md:grid-cols-3">
               <div>
                 <p className="text-sm text-ink/60">Total Communities</p>
@@ -150,6 +147,6 @@ export default function CommunitiesPage() {
           </div>
         )}
       </div>
-    </main>
+    </PageWrapper>
   );
 }

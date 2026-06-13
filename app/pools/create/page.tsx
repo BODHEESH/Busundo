@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Car, Bike, Users as UsersIcon, CheckCircle2, AlertCircle } from "lucide-react";
+import PageWrapper from "@/components/shared/PageWrapper";
 
 export default function CreatePoolPage() {
   const router = useRouter();
@@ -72,35 +73,39 @@ export default function CreatePoolPage() {
   };
 
   return (
-    <main className="min-h-screen bg-paper">
-      <div className="mx-auto max-w-3xl px-4 py-8">
-        {/* Header */}
-        <div className="mb-8 animate-fade-in">
+    <PageWrapper
+      currentPage="pools"
+      title="Create New Pool"
+      description="Share your ride and split costs with fellow commuters"
+      gradient={true}
+    >
+      <div className="mx-auto max-w-3xl px-4">
+        <div className="mb-8">
           <Link
             href="/pools"
-            className="inline-flex items-center gap-2 text-sm text-transit hover:underline mb-4"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Pools
           </Link>
-          <h1 className="font-display text-3xl font-bold tracking-tight">
+          <h1 className="text-4xl font-bold text-white mb-4">
             Create Ride Pool
           </h1>
-          <p className="mt-2 text-ink/60">
+          <p className="text-lg text-blue-100">
             Share your daily commute and save costs
           </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6 animate-slide-in-up">
-          <div className="rounded-xl2 border border-line bg-white p-6">
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
             {/* Route */}
             <div className="mb-6">
-              <h3 className="font-display font-bold mb-4">Route Details</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Route Details</h3>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="from" className="block text-sm font-medium mb-2">
-                    From <span className="text-signal">*</span>
+                  <label htmlFor="from" className="block text-sm font-semibold text-gray-700 mb-2">
+                    From <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -108,13 +113,13 @@ export default function CreatePoolPage() {
                     value={formData.from}
                     onChange={(e) => setFormData({ ...formData, from: e.target.value })}
                     placeholder="Mullassery"
-                    className="w-full rounded-lg border border-line px-4 py-2 focus:border-transit focus:outline-none focus:ring-2 focus:ring-transit/20"
+                    className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="to" className="block text-sm font-medium mb-2">
-                    To <span className="text-signal">*</span>
+                  <label htmlFor="to" className="block text-sm font-semibold text-gray-700 mb-2">
+                    To <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -122,7 +127,7 @@ export default function CreatePoolPage() {
                     value={formData.to}
                     onChange={(e) => setFormData({ ...formData, to: e.target.value })}
                     placeholder="Infopark"
-                    className="w-full rounded-lg border border-line px-4 py-2 focus:border-transit focus:outline-none focus:ring-2 focus:ring-transit/20"
+                    className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                     required
                   />
                 </div>
@@ -130,26 +135,26 @@ export default function CreatePoolPage() {
             </div>
 
             {/* Time & Days */}
-            <div className="mb-6">
-              <h3 className="font-display font-bold mb-4">Schedule</h3>
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Schedule</h3>
               
               <div className="mb-4">
-                <label htmlFor="time" className="block text-sm font-medium mb-2">
-                  Departure Time <span className="text-signal">*</span>
+                <label htmlFor="time" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Departure Time <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="time"
                   id="time"
                   value={formData.departureTime}
                   onChange={(e) => setFormData({ ...formData, departureTime: e.target.value })}
-                  className="w-full rounded-lg border border-line px-4 py-2 focus:border-transit focus:outline-none focus:ring-2 focus:ring-transit/20"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">
-                  Days <span className="text-signal">*</span>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Days <span className="text-red-500">*</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {weekDays.map(day => (
@@ -157,10 +162,10 @@ export default function CreatePoolPage() {
                       key={day}
                       type="button"
                       onClick={() => toggleDay(day)}
-                      className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+                      className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all ${
                         formData.days.includes(day)
-                          ? "bg-transit text-white"
-                          : "bg-gray-100 text-ink/60 hover:bg-gray-200"
+                          ? "bg-gradient-to-r from-pink-600 to-pink-700 text-white shadow-md"
+                          : "bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200"
                       }`}
                     >
                       {day}
@@ -174,12 +179,12 @@ export default function CreatePoolPage() {
             </div>
 
             {/* Vehicle & Seats */}
-            <div className="mb-6">
-              <h3 className="font-display font-bold mb-4">Vehicle Details</h3>
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Vehicle Details</h3>
               
               <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">
-                  Vehicle Type <span className="text-signal">*</span>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Vehicle Type <span className="text-red-500">*</span>
                 </label>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {[
@@ -192,10 +197,10 @@ export default function CreatePoolPage() {
                       key={value}
                       type="button"
                       onClick={() => setFormData({ ...formData, vehicleType: value as any })}
-                      className={`rounded-lg border p-4 flex flex-col items-center gap-2 transition-all ${
+                      className={`rounded-xl border-2 p-4 flex flex-col items-center gap-2 transition-all cursor-pointer ${
                         formData.vehicleType === value
-                          ? "border-transit bg-transit/5"
-                          : "border-line hover:border-transit/50"
+                          ? "border-pink-500 bg-pink-50 shadow-md"
+                          : "border-gray-200 hover:border-pink-300 hover:bg-pink-50/50"
                       }`}
                     >
                       <Icon className="h-6 w-6" />
@@ -206,8 +211,8 @@ export default function CreatePoolPage() {
               </div>
 
               <div>
-                <label htmlFor="seats" className="block text-sm font-medium mb-2">
-                  Available Seats <span className="text-signal">*</span>
+                <label htmlFor="seats" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Available Seats <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"
@@ -216,16 +221,16 @@ export default function CreatePoolPage() {
                   max="10"
                   value={formData.seatsAvailable}
                   onChange={(e) => setFormData({ ...formData, seatsAvailable: parseInt(e.target.value) })}
-                  className="w-full rounded-lg border border-line px-4 py-2 focus:border-transit focus:outline-none focus:ring-2 focus:ring-transit/20"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                   required
                 />
               </div>
             </div>
 
             {/* Cost */}
-            <div className="mb-6">
-              <label htmlFor="cost" className="block text-sm font-medium mb-2">
-                Cost Per Person (₹) <span className="text-signal">*</span>
+            <div className="mb-8">
+              <label htmlFor="cost" className="block text-sm font-semibold text-gray-700 mb-2">
+                Cost Per Person (₹) <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -235,17 +240,17 @@ export default function CreatePoolPage() {
                 value={formData.costPerPerson}
                 onChange={(e) => setFormData({ ...formData, costPerPerson: e.target.value })}
                 placeholder="50"
-                className="w-full rounded-lg border border-line px-4 py-2 focus:border-transit focus:outline-none focus:ring-2 focus:ring-transit/20"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                 required
               />
-              <p className="mt-1 text-xs text-ink/40">
-                Suggested cost per person for this route
+              <p className="mt-2 text-sm text-gray-500">
+                💡 Suggested cost per person for this route
               </p>
             </div>
 
             {/* Description */}
             <div>
-              <label htmlFor="description" className="block text-sm font-medium mb-2">
+              <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
                 Description (Optional)
               </label>
               <textarea
@@ -254,7 +259,7 @@ export default function CreatePoolPage() {
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 placeholder="Any additional details about the pool..."
                 rows={3}
-                className="w-full rounded-lg border border-line px-4 py-2 focus:border-transit focus:outline-none focus:ring-2 focus:ring-transit/20"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
               />
             </div>
           </div>
@@ -262,10 +267,10 @@ export default function CreatePoolPage() {
           {/* Message */}
           {message && (
             <div
-              className={`rounded-lg border p-4 animate-slide-in-up ${
+              className={`rounded-2xl border p-6 shadow-lg animate-fade-in-up ${
                 message.type === "success"
-                  ? "border-green-200 bg-green-50"
-                  : "border-red-200 bg-red-50"
+                  ? "border-green-300 bg-green-50"
+                  : "border-red-300 bg-red-50"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -290,18 +295,18 @@ export default function CreatePoolPage() {
             <button
               type="submit"
               disabled={loading || formData.days.length === 0}
-              className="w-full rounded-lg bg-gradient-travel px-6 py-3 font-medium text-white transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-full bg-gradient-to-r from-pink-600 to-pink-700 px-8 py-4 text-lg font-semibold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {loading ? "Creating Pool..." : "Create Ride Pool"}
             </button>
             {formData.days.length === 0 && (
-              <p className="mt-2 text-xs text-signal text-center">
-                Please select at least one day to create a pool
+              <p className="mt-3 text-sm text-red-500 text-center font-medium">
+                ⚠️ Please select at least one day to create a pool
               </p>
             )}
           </div>
         </form>
       </div>
-    </main>
+    </PageWrapper>
   );
 }
