@@ -1,5 +1,9 @@
+import { config } from "dotenv";
 import { getRoutesCollection } from "../lib/models";
 import clientPromise from "../lib/mongodb";
+
+// Load environment variables
+config({ path: ".env.local" });
 
 const routes = [
   {
@@ -90,7 +94,7 @@ async function seedRoutes() {
     console.log("\n✅ Seeding completed successfully!");
     
     // Close connection
-    const client = await clientPromise;
+    const client = await clientPromise();
     await client.close();
     process.exit(0);
   } catch (error) {
