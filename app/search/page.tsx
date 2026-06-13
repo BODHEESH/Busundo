@@ -3,13 +3,14 @@ import { ArrowRight, ChevronRight, Users, Clock3, Bus, MapPin } from "lucide-rea
 import { TopNav } from "@/components/nav";
 import { mockRoutes, mockGroups } from "@/lib/mock-data";
 
-export default function SearchResultsPage({
+export default async function SearchResultsPage({
   searchParams,
 }: {
-  searchParams: { from?: string; to?: string };
+  searchParams: Promise<{ from?: string; to?: string }>;
 }) {
-  const from = searchParams.from || "Aluva";
-  const to = searchParams.to || "Kakkanad";
+  const params = await searchParams;
+  const from = params.from || "Aluva";
+  const to = params.to || "Kakkanad";
 
   return (
     <main className="mx-auto max-w-3xl px-4 pb-16">

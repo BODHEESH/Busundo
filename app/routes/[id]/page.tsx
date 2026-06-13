@@ -5,8 +5,9 @@ import { TopNav } from "@/components/nav";
 import { RouteLine } from "@/components/route-line";
 import { mockRoutes, mockGroups } from "@/lib/mock-data";
 
-export default function RouteDetailPage({ params }: { params: { id: string } }) {
-  const route = mockRoutes.find((r) => r.id === params.id);
+export default async function RouteDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const route = mockRoutes.find((r) => r.id === id);
   if (!route) notFound();
 
   const groups = mockGroups.filter((g) => g.routeId === route.id);

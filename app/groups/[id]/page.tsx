@@ -6,8 +6,9 @@ import { StatusBadge } from "@/components/status-badge";
 import { STATUS_META, STATUS_ORDER } from "@/lib/status";
 import { mockGroups, mockRoutes } from "@/lib/mock-data";
 
-export default function GroupDetailPage({ params }: { params: { id: string } }) {
-  const group = mockGroups.find((g) => g.id === params.id);
+export default async function GroupDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const group = mockGroups.find((g) => g.id === id);
   if (!group) notFound();
   const route = mockRoutes.find((r) => r.id === group.routeId)!;
   const you = group.members.find((m) => m.isYou);

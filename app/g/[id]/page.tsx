@@ -5,8 +5,9 @@ import { RouteLine } from "@/components/route-line";
 import { StatusBadge } from "@/components/status-badge";
 import { mockGroups, mockRoutes } from "@/lib/mock-data";
 
-export default function PublicGroupPage({ params }: { params: { id: string } }) {
-  const group = mockGroups.find((g) => g.id === params.id);
+export default async function PublicGroupPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const group = mockGroups.find((g) => g.id === id);
   if (!group) notFound();
   const route = mockRoutes.find((r) => r.id === group.routeId)!;
 
