@@ -1,6 +1,7 @@
 /**
  * KSRTC Kerala Bus Route Scraper (TypeScript/Node.js)
  * Scrapes bus route data from KSRTC Kerala website
+ * Website: https://online.ksrtc.kerala.gov.in
  */
 
 import axios from 'axios';
@@ -15,6 +16,8 @@ interface BusRoute {
   stops: string[];
   distance?: string;
   duration?: string;
+  busType?: string;
+  fare?: string;
 }
 
 interface BusSchedule {
@@ -24,6 +27,7 @@ interface BusSchedule {
   duration: string;
   fare: string;
   busType: string;
+  stops?: string[];
 }
 
 class KSRTCScraper {

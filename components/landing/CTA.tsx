@@ -9,7 +9,7 @@ export default function CTA() {
           Ready to Start Travelling Together?
         </h2>
         <p className="text-xl text-blue-100 mb-8">
-          Join the Busundo community today and never travel alone again.
+          Join the BusUndo community today and never travel alone again.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" variant="secondary" className="h-12 px-8 text-lg">

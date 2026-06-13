@@ -1,4 +1,4 @@
-# 📋 What's Pending for Busundo MVP
+# 📋 What's Pending for BusUndo MVP
 
 ## ✅ What's DONE (Week 1 Complete!)
 
@@ -242,7 +242,7 @@ Features:
 
 ---
 
-## 🎯 What Makes Busundo Successful
+## 🎯 What Makes BusUndo Successful
 
 **Not this:**
 - ❌ Perfect code

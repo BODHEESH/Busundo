@@ -383,7 +383,7 @@ Click "Generate Route"
 
 ---
 
-**Busundo is now a functional "Google Maps for Kerala Private Buses"! 🚌✨**
+**BusUndo is now a functional "Google Maps for Kerala Private Buses"! 🚌✨**
 
 You can:
 - Search for buses (direct + one-change)

@@ -12,7 +12,7 @@ export default async function GroupDetailPage({ params }: { params: Promise<{ id
   if (!group) notFound();
   const route = mockRoutes.find((r) => r.id === group.routeId)!;
   const you = group.members.find((m) => m.isYou);
-  const shareUrl = `busundo.app/g/${group.id}`;
+  const shareUrl = `BusUndo.app/g/${group.id}`;
 
   return (
     <main className="mx-auto max-w-3xl px-4 pb-16">

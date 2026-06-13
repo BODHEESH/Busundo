@@ -1,10 +1,10 @@
-# Busundo Project Setup - Complete ✅
+# BusUndo Project Setup - Complete ✅
 
 ## What Has Been Created
 
 ### ✅ Complete Next.js 15 Project Structure
 
-The Busundo community bus travel platform is now fully set up with:
+The BusUndo community bus travel platform is now fully set up with:
 
 #### **Configuration Files**
 - ✅ `package.json` - All dependencies configured (React 18.3.1 for compatibility)
@@ -46,7 +46,7 @@ The Busundo community bus travel platform is now fully set up with:
 The landing page includes:
 
 1. **Hero Section**
-   - Eye-catching headline: "Bus Undo? Open Busundo."
+   - Eye-catching headline: "Bus Undo? Open BusUndo."
    - Route search inputs (From/To)
    - Key value propositions with icons
 
@@ -160,7 +160,7 @@ The app is live and ready for development!
 ## 📁 Project Structure
 
 ```
-busundo/
+BusUndo/
 ├── app/
 │   ├── globals.css
 │   ├── layout.tsx

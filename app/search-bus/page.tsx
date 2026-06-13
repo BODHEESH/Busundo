@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Search, Bus, MapPin, ArrowRight, RefreshCw, CheckCircle2 } from "lucide-react";
+import PageWrapper from "@/components/shared/PageWrapper";
 
 interface DirectRoute {
   routeId: string;
@@ -97,25 +98,18 @@ export default function SearchBusPage() {
   };
 
   return (
-    <main className="min-h-screen bg-paper">
-      <div className="mx-auto max-w-4xl px-4 py-8">
-        {/* Header */}
-        <div className="mb-8 animate-fade-in">
-          <Link href="/" className="text-sm text-transit hover:underline mb-4 inline-block">
-            ← Back to Home
-          </Link>
-          <h1 className="font-display text-3xl font-bold tracking-tight">
-            Find Your Bus
-          </h1>
-          <p className="mt-2 text-ink/60">
-            Search for direct buses or one-change routes
-          </p>
-        </div>
+    <PageWrapper 
+      currentPage="search"
+      title="Find Your Bus"
+      description="Search for direct buses or one-change routes across Kerala"
+      gradient={true}
+    >
+      <div className="mx-auto max-w-4xl px-4">{/* Content wrapper */}
 
         {/* Search Form */}
-        <form onSubmit={handleSearch} className="mb-8 animate-slide-in-up">
-          <div className="rounded-xl2 border border-line bg-white p-6">
-            <div className="space-y-4">
+        <form onSubmit={handleSearch} className="mb-8">
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
+            <div className="space-y-6">
               {/* From */}
               <div>
                 <label htmlFor="from" className="block text-sm font-medium mb-2">
@@ -368,6 +362,6 @@ export default function SearchBusPage() {
           </div>
         )}
       </div>
-    </main>
+    </PageWrapper>
   );
 }

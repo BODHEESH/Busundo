@@ -1,6 +1,6 @@
-Busundo – The Community Mobility Platform
+BusUndo – The Community Mobility Platform
 
-Busundo is a mobility ecosystem that helps people discover, plan, share, and optimize local transportation.
+BusUndo is a mobility ecosystem that helps people discover, plan, share, and optimize local transportation.
 
 Think:
 
@@ -46,11 +46,11 @@ Local Knowledge
 Bus Conductors
 Friends
 
-Busundo brings everything together.
+BusUndo brings everything together.
 
 Vision Statement
 
-Busundo is a community-powered mobility platform that helps people move smarter through public transport, ride sharing, pooling, route discovery, and local travel communities.
+BusUndo is a community-powered mobility platform that helps people move smarter through public transport, ride sharing, pooling, route discovery, and local travel communities.
 
 Pillar 1: Route Discovery
 
@@ -60,7 +60,7 @@ User:
 
 Mullassery → Kodungallur
 
-Busundo:
+BusUndo:
 
 Bus 1:
 Mullassery → Thriprayar
@@ -82,7 +82,7 @@ Mullassery → Infopark
 
 9 AM
 
-Busundo:
+BusUndo:
 
 4 people travel this route daily
 
@@ -163,7 +163,7 @@ Future feature.
 
 Bus operators install:
 
-Busundo Driver App
+BusUndo Driver App
 
 Passengers see:
 
@@ -200,7 +200,7 @@ User Journey Example
 Student
 Mullassery → Thrissur Engineering College
 
-Busundo:
+BusUndo:
 
 Best Bus Route
 
@@ -212,7 +212,7 @@ Daily Travel Alerts
 IT Employee
 Mullassery → Infopark
 
-Busundo:
+BusUndo:
 
 Bus Route
 
@@ -224,7 +224,7 @@ Traffic Updates
 Tourist
 Guruvayur → Athirappilly
 
-Busundo:
+BusUndo:
 
 Bus Routes
 
@@ -271,16 +271,16 @@ Route Analytics
 Passenger Insights
 The Long-Term Pitch
 
-Don't pitch Busundo as:
+Don't pitch BusUndo as:
 
 "A bus route finder."
 
 Pitch it as:
 
-"Busundo is a community-powered mobility platform that helps people discover routes, share rides, join travel communities, receive real-time transport updates, and move efficiently through local transportation networks."
+"BusUndo is a community-powered mobility platform that helps people discover routes, share rides, join travel communities, receive real-time transport updates, and move efficiently through local transportation networks."
 
 And the simple tagline:
 
-"Busundo – Travel Together. Travel Smarter."
+"BusUndo – Travel Together. Travel Smarter."
 
 That positioning gives you room to grow from a Thrissur bus route app into a full-scale mobility platform for Kerala and eventually India.

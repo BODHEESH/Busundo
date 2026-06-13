@@ -36,7 +36,7 @@ export default function OnboardingPage() {
             </span>
           </div>
           <h1 className="font-display text-2xl font-bold tracking-tight">
-            Welcome to Busundo!
+            Welcome to BusUndo!
           </h1>
           <p className="mt-2 text-sm text-ink/60">
             Let&apos;s personalize your experience

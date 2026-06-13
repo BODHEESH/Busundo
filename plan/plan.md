@@ -1,9 +1,9 @@
-# Busundo App - Complete Development Guide
+# BusUndo App - Complete Development Guide
 
-Based on the comprehensive product plan, here's how to create the Busundo community-powered bus travel platform:
+Based on the comprehensive product plan, here's how to create the BusUndo community-powered bus travel platform:
 
 ## **Core Concept**
-Busundo is a **community travel coordination platform**, not a bus tracking app. It helps students and commuters find travel companions and coordinate journeys together.
+BusUndo is a **community travel coordination platform**, not a bus tracking app. It helps students and commuters find travel companions and coordinate journeys together.
 
 ---
 

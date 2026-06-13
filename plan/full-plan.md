@@ -1,4 +1,4 @@
-For **Busundo**, don't think like a developer first. Think like **Google Maps for Kerala private buses**.
+For **BusUndo**, don't think like a developer first. Think like **Google Maps for Kerala private buses**.
 
 Your biggest challenge is **data collection**, not coding.
 
@@ -238,7 +238,7 @@ Verified
 
 ## Phase 7: AI Assisted Growth
 
-This is where Busundo becomes powerful.
+This is where BusUndo becomes powerful.
 
 User asks:
 
@@ -248,7 +248,7 @@ Mullassery → Kodungallur
 
 No direct bus.
 
-Busundo finds:
+BusUndo finds:
 
 ```text
 Bus 1:
@@ -313,7 +313,7 @@ This lets you add a route in **30 seconds**.
 
 ---
 
-## Recommended MVP for Busundo
+## Recommended MVP for BusUndo
 
 ### Week 1
 

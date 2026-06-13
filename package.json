@@ -1,5 +1,5 @@
 {
-  "name": "busundo",
+  "name": "BusUndo",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -11,10 +11,10 @@
     "seed:stops": "tsx scripts/seed-chavakkad-stops.ts",
     "seed:routes": "tsx scripts/seed-routes-v2.ts",
     "seed:all": "npm run seed:stops && npm run seed:routes",
-    "scrape:ksrtc": "tsx scripts/scrape-ksrtc.ts",
+    "scrape:ksrtc": "tsx scripts/scrape-ksrtc-working.ts",
     "scrape:busundoin": "tsx scripts/scrape-busundoin.ts",
     "import:ksrtc": "tsx scripts/import-ksrtc-data.ts",
-    "scrape:all": "npm run scrape:ksrtc && npm run scrape:busundoin && npm run import:ksrtc"
+    "scrape:all": "npm run scrape:ksrtc && npm run import:ksrtc"
   },
   "dependencies": {
     "axios": "^1.6.0",

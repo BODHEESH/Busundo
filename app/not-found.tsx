@@ -39,8 +39,8 @@ export default function NotFound() {
         <div className="mt-12 pt-8 border-t border-line">
           <p className="text-xs text-ink/40">
             Need help? Contact us at{" "}
-            <a href="mailto:support@busundo.com" className="text-transit hover:underline">
-              support@busundo.com
+            <a href="mailto:support@BusUndo.com" className="text-transit hover:underline">
+              support@BusUndo.com
             </a>
           </p>
         </div>

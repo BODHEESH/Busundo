@@ -9,7 +9,7 @@ export function Logo() {
         <span className="h-2 w-2 rounded-full bg-signal" />
       </span>
       <span className="font-display text-lg font-bold tracking-tight">
-        Busundo
+        BusUndo
       </span>
     </Link>
   );

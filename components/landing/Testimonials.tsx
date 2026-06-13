@@ -5,7 +5,7 @@ const testimonials = [
   {
     name: "Rahul Krishna",
     college: "MEC Student",
-    text: "Busundo made my daily commute so much easier! I can now coordinate with my classmates and never miss the bus.",
+    text: "BusUndo made my daily commute so much easier! I can now coordinate with my classmates and never miss the bus.",
     rating: 5
   },
   {
@@ -17,7 +17,7 @@ const testimonials = [
   {
     name: "Arun Kumar",
     college: "Rajagiri Student",
-    text: "No more waiting alone at bus stops. I always find travel companions through Busundo.",
+    text: "No more waiting alone at bus stops. I always find travel companions through BusUndo.",
     rating: 5
   }
 ]
@@ -31,7 +31,7 @@ export default function Testimonials() {
             What Students Say
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Join thousands of students already using Busundo
+            Join thousands of students already using BusUndo
           </p>
         </div>
 

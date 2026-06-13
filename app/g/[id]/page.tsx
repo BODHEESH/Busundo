@@ -20,7 +20,7 @@ export default async function PublicGroupPage({ params }: { params: Promise<{ id
               <span className="h-2 w-2 rounded-full bg-signal" />
             </span>
             <span className="font-display text-lg font-bold tracking-tight">
-              Busundo
+              BusUndo
             </span>
           </div>
           <Link
@@ -110,7 +110,7 @@ export default async function PublicGroupPage({ params }: { params: Promise<{ id
         </div>
 
         <p className="mt-6 text-center text-xs text-ink/40">
-          Shared from Busundo · Travel together, every day
+          Shared from BusUndo · Travel together, every day
         </p>
       </div>
     </main>

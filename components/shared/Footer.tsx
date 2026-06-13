@@ -8,7 +8,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Bus className="w-8 h-8 text-blue-500" />
-              <span className="text-xl font-bold text-white">Busundo</span>
+              <span className="text-xl font-bold text-white">BusUndo</span>
             </div>
             <p className="text-sm">
               Community-powered bus travel platform for students and commuters in Kerala.
@@ -52,7 +52,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 text-center text-sm">
-          <p>&copy; 2024 Busundo. All rights reserved. Made with ❤️ for Kerala students.</p>
+          <p>&copy; 2024 BusUndo. All rights reserved. Made with ❤️ for Kerala students.</p>
         </div>
       </div>
     </footer>

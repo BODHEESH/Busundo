@@ -1,5 +1,5 @@
 /**
- * Import KSRTC scraped data into Busundo database
+ * Import KSRTC scraped data into BusUndo database
  */
 
 import { config } from "dotenv";

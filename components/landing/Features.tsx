@@ -40,7 +40,7 @@ export default function Features() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Why Choose Busundo?
+            Why Choose BusUndo?
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             More than just bus schedules. We help you travel together.

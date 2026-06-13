@@ -1,6 +1,6 @@
 # 🕷️ COMPLETE SCRAPING SETUP GUIDE
 
-## 🎯 GOAL: Scrape 40,157+ Routes for Busundo.com
+## 🎯 GOAL: Scrape 40,157+ Routes for BusUndo.com
 
 ---
 
@@ -41,11 +41,11 @@ npm run scrape:ksrtc
 
 ---
 
-### **2. busundo.in Scraper** 🕷️
+### **2. BusUndo.in Scraper** 🕷️
 **File:** `scripts/scrape-busundoin.ts`
 
 **What it scrapes:**
-- busundo.in competitor data
+- BusUndo.in competitor data
 - 1032+ stops already collected
 - Community-contributed routes
 - Verified route data
@@ -90,7 +90,7 @@ npm run scrape:all
 
 **This will:**
 1. Scrape KSRTC Kerala data
-2. Scrape busundo.in data
+2. Scrape BusUndo.in data
 3. Import everything to database
 
 **Time:** 2-4 hours (depending on network)
@@ -106,7 +106,7 @@ npm install
 # 2. Scrape KSRTC data
 npm run scrape:ksrtc
 
-# 3. Scrape busundo.in data
+# 3. Scrape BusUndo.in data
 npm run scrape:busundoin
 
 # 4. Import to database
@@ -127,7 +127,7 @@ npm run import:ksrtc
 ✅ Timing information
 ```
 
-**busundo.in Data:**
+**BusUndo.in Data:**
 ```
 ✅ 1,032+ stops
 ✅ Community-verified routes
@@ -158,7 +158,7 @@ npm run import:ksrtc
 - 40,000+ routes ✅
 
 **Result:**
-- **BETTER than busundo.in** (they have 1032 stops)
+- **BETTER than BusUndo.in** (they have 1032 stops)
 - **BETTER than Bus Evide** (they have 40,157 routes)
 - **SAME data + YOUR unique features!**
 
@@ -212,7 +212,7 @@ npm install --save-dev @types/cheerio
 ```bash
 # Solution: Try again later
 # KSRTC website may be down
-# Or scrape busundo.in instead
+# Or scrape BusUndo.in instead
 npm run scrape:busundoin
 ```
 
@@ -229,7 +229,7 @@ npm run scrape:busundoin
 
 ### **Phase 1: Quick Win (Day 1)**
 ```bash
-# Scrape busundo.in first
+# Scrape BusUndo.in first
 npm run scrape:busundoin
 
 # Import to database
@@ -433,7 +433,7 @@ npm run dev
 - **Total: ~4-5 hours**
 
 **Result:**
-- **BETTER data than busundo.in**
+- **BETTER data than BusUndo.in**
 - **SAME data as Bus Evide**
 - **PLUS your unique features!**
 

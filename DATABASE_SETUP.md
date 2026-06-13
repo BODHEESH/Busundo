@@ -1,10 +1,10 @@
-# 🗄️ Busundo Database Setup
+# 🗄️ BusUndo Database Setup
 
 ## ✅ MongoDB Connection Established!
 
 ### **Connection Details**
-- **Database:** Busundo
-- **Connection String:** `mongodb+srv://brototypeTest:vcbodheesh@clusterfortest.yvsxay2.mongodb.net/Busundo`
+- **Database:** BusUndo
+- **Connection String:** `mongodb+srv://brototypeTest:vcbodheesh@clusterfortest.yvsxay2.mongodb.net/BusUndo`
 - **Status:** ✅ Connected
 
 ---
@@ -55,7 +55,7 @@ You should see:
 {
   "success": true,
   "message": "Database connected successfully!",
-  "database": "Busundo",
+  "database": "BusUndo",
   "collections": [...],
   "timestamp": "2026-06-14T..."
 }
@@ -346,7 +346,7 @@ npm run seed
 1. Go to https://cloud.mongodb.com
 2. Navigate to your cluster
 3. Click "Browse Collections"
-4. Select "Busundo" database
+4. Select "BusUndo" database
 5. You should see the `routes` collection with 4 documents
 
 ---
@@ -400,7 +400,7 @@ npm run seed
 
 Make sure `.env.local` has:
 ```env
-MONGODB_URI=mongodb+srv://brototypeTest:vcbodheesh@clusterfortest.yvsxay2.mongodb.net/Busundo
+MONGODB_URI=mongodb+srv://brototypeTest:vcbodheesh@clusterfortest.yvsxay2.mongodb.net/BusUndo
 ```
 
 ✅ Already configured!

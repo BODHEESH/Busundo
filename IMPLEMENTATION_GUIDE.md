@@ -1,4 +1,4 @@
-# 🚌 Busundo - Complete Implementation Guide
+# 🚌 BusUndo - Complete Implementation Guide
 
 ## ✅ What We've Built (Data-First Approach)
 
@@ -487,7 +487,7 @@ Expected: No routes found (yet!)
 5. **Verification:** Wikipedia-style community verification
 6. **Local Focus:** Start with areas you know (Mullassery, Chavakkad)
 
-### **What Makes Busundo Different**
+### **What Makes BusUndo Different**
 
 - **Not a booking platform** - Pure information
 - **Community verified** - Like Wikipedia
@@ -527,7 +527,7 @@ package.json                  ✅ Updated with new scripts
 
 ---
 
-**You now have a solid foundation for Busundo!**
+**You now have a solid foundation for BusUndo!**
 
 The data-first approach means you can:
 1. Add routes in 30 seconds

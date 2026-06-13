@@ -1,8 +1,8 @@
-# 🎯 COMPETITIVE ANALYSIS: Busundo.com vs Competitors
+# 🎯 COMPETITIVE ANALYSIS: BusUndo.com vs Competitors
 
 ## 🔍 COMPETITOR ANALYSIS
 
-### **1. busundo.in** (Your Direct Competitor)
+### **1. BusUndo.in** (Your Direct Competitor)
 
 **What They Have:**
 - ✅ Route search (Mullassery → Chalakkudy working)
@@ -42,13 +42,13 @@
 
 ---
 
-## 🚀 HOW BUSUNDO.COM WILL BE BETTER
+## 🚀 HOW BusUndo.COM WILL BE BETTER
 
 ### **Your Advantages:**
 
 #### **1. Better Domain** ✅
 ```
-busundo.com > busundo.in
+BusUndo.com > BusUndo.in
 - .com is more professional
 - Better for international expansion
 - More memorable
@@ -56,8 +56,8 @@ busundo.com > busundo.in
 
 #### **2. Complete Platform** ✅
 ```
-busundo.in: Just route search
-Busundo.com: Route search + Pooling + Communities + Circles
+BusUndo.in: Just route search
+BusUndo.com: Route search + Pooling + Communities + Circles
 
 You have 4 pillars, they have 1!
 ```
@@ -66,7 +66,7 @@ You have 4 pillars, they have 1!
 
 **What You Have That They Don't:**
 
-| Feature | Busundo.com | busundo.in | Bus Evide |
+| Feature | BusUndo.com | BusUndo.in | Bus Evide |
 |---------|-------------|------------|-----------|
 | Route Search | ✅ | ✅ | ✅ |
 | One-Change Routes | ✅ | ❌ | ❌ |
@@ -95,7 +95,7 @@ Method: Scraping + Manual + Community
 1. ✅ Run KSRTC scraper (get 500-1000 routes)
 2. ✅ Use admin dashboard (add 50 routes manually)
 3. ✅ Enable community contributions
-4. ✅ Import busundo.in data (if possible via scraping)
+4. ✅ Import BusUndo.in data (if possible via scraping)
 
 ---
 
@@ -111,7 +111,7 @@ Your Advantage:
 - Daily commute pools
 - Save money
 
-busundo.in: ❌ Doesn't have this
+BusUndo.in: ❌ Doesn't have this
 ```
 
 #### **2. Communities** ✅ DONE
@@ -122,7 +122,7 @@ Your Advantage:
 - Discussion boards
 - Traffic alerts
 
-busundo.in: ❌ Doesn't have this
+BusUndo.in: ❌ Doesn't have this
 ```
 
 #### **3. Travel Circles** ✅ DONE
@@ -133,7 +133,7 @@ Your Advantage:
 - Thrissur Nurses Pool
 - Invite-only circles
 
-busundo.in: ❌ Doesn't have this
+BusUndo.in: ❌ Doesn't have this
 ```
 
 ---
@@ -174,7 +174,7 @@ Target Keywords:
 - "KSRTC bus search"
 - "Mullassery to Kochi bus"
 
-Your Domain: busundo.com (better for SEO)
+Your Domain: BusUndo.com (better for SEO)
 ```
 
 #### **2. Social Media**
@@ -182,7 +182,7 @@ Your Domain: busundo.com (better for SEO)
 - Instagram: Bus route tips
 - Facebook: Community groups
 - WhatsApp: Share with friends
-- YouTube: How to use Busundo
+- YouTube: How to use BusUndo
 ```
 
 #### **3. College Partnerships**
@@ -200,11 +200,11 @@ Your Domain: busundo.com (better for SEO)
 ### **1. Complete Mobility Platform** 🚀
 
 ```
-busundo.in:
+BusUndo.in:
 - Search buses ✅
 - That's it ❌
 
-Busundo.com:
+BusUndo.com:
 - Search buses ✅
 - Ride pooling ✅
 - Communities ✅
@@ -259,7 +259,7 @@ Them:
 
 ## 📊 FEATURE COMPARISON
 
-| Feature | Busundo.com | busundo.in | Bus Evide |
+| Feature | BusUndo.com | BusUndo.in | Bus Evide |
 |---------|-------------|------------|-----------|
 | **BASIC** | | | |
 | Route Search | ✅ | ✅ | ✅ |
@@ -294,7 +294,7 @@ Goal: Match their 1032+ stops
 
 Actions:
 1. ✅ Run KSRTC scraper
-2. ✅ Scrape busundo.in (if legal)
+2. ✅ Scrape BusUndo.in (if legal)
 3. ✅ Manual entry (50 routes)
 4. ✅ Community contributions
 
@@ -344,12 +344,12 @@ Result: User growth
 
 ## 💡 QUICK WINS
 
-### **1. Scrape busundo.in Data** 🕷️
+### **1. Scrape BusUndo.in Data** 🕷️
 ```python
 # They have 1032+ stops already collected
 # You can scrape their data to bootstrap
 
-Target: busundo.in/api/* (if they have API)
+Target: BusUndo.in/api/* (if they have API)
 Or: Scrape HTML pages
 Result: 1000+ stops instantly
 ```
@@ -391,11 +391,11 @@ Time: 2-3 hours
 ### **Positioning:**
 
 ```
-busundo.in:
+BusUndo.in:
 "Community-powered bus data for Kerala"
 → Just a search tool
 
-Busundo.com:
+BusUndo.com:
 "Travel Together. Travel Smarter."
 → Complete mobility platform
 ```
@@ -403,8 +403,8 @@ Busundo.com:
 ### **Tagline:**
 
 ```
-❌ busundo.in: "Is there a bus?"
-✅ Busundo.com: "Travel Together. Travel Smarter."
+❌ BusUndo.in: "Is there a bus?"
+✅ BusUndo.com: "Travel Together. Travel Smarter."
 
 Better positioning!
 ```
@@ -412,10 +412,10 @@ Better positioning!
 ### **Value Proposition:**
 
 ```
-busundo.in:
+BusUndo.in:
 - Find buses ✅
 
-Busundo.com:
+BusUndo.com:
 - Find buses ✅
 - Share rides ✅
 - Join communities ✅
@@ -434,7 +434,7 @@ Without data, you can't compete!
 
 Actions:
 1. Run KSRTC scraper (500-1000 routes)
-2. Scrape busundo.in (1000+ stops)
+2. Scrape BusUndo.in (1000+ stops)
 3. Manual entry (50 routes)
 4. Community contributions
 
@@ -485,13 +485,13 @@ Timeline: Ongoing
 
 ### **Current Status:**
 
-**busundo.in:**
+**BusUndo.in:**
 - 1032+ stops ✅
 - Basic search ✅
 - Community data ✅
 - That's it ❌
 
-**Busundo.com:**
+**BusUndo.com:**
 - 68 stops (need more!) ⚠️
 - Advanced search ✅
 - Ride pooling ✅
@@ -501,7 +501,7 @@ Timeline: Ongoing
 
 ### **Your Advantages:**
 
-1. ✅ **Better domain** (busundo.com)
+1. ✅ **Better domain** (BusUndo.com)
 2. ✅ **More features** (4 pillars vs 1)
 3. ✅ **Better tech** (Next.js, MongoDB)
 4. ✅ **Social features** (pooling, communities)
@@ -525,7 +525,7 @@ Timeline: Ongoing
 # 1. Run KSRTC scraper
 npm run scrape:ksrtc
 
-# 2. Scrape busundo.in
+# 2. Scrape BusUndo.in
 npm run scrape:busundoin
 
 # 3. Manual entry
@@ -544,7 +544,7 @@ Add:
 - Filters
 - Better UI
 
-Result: Match busundo.in
+Result: Match BusUndo.in
 ```
 
 ### **Week 5+: DOMINATE** 🏆
@@ -562,7 +562,7 @@ Result: Better than everyone!
 
 **YOU WILL WIN BECAUSE:**
 
-1. ✅ Better domain (busundo.com)
+1. ✅ Better domain (BusUndo.com)
 2. ✅ More features (complete platform)
 3. ✅ Better technology
 4. ✅ Social features they don't have
@@ -576,4 +576,4 @@ Result: Better than everyone!
 
 ---
 
-**Busundo.com will be THE platform for Kerala bus travel! 🚌✨**
+**BusUndo.com will be THE platform for Kerala bus travel! 🚌✨**

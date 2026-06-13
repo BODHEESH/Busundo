@@ -243,7 +243,7 @@ Ongoing:
 
 ---
 
-## 🎯 INTEGRATION WITH BUSUNDO
+## 🎯 INTEGRATION WITH BusUndo
 
 ### **Import Script:**
 ```typescript

@@ -1,8 +1,8 @@
-# Busundo - Complete User Workflow & Functionality
+# BusUndo - Complete User Workflow & Functionality
 
 ## 🎯 Overview
 
-This document explains the complete user journey through the Busundo app, from first visit to logout, including all features and interactions.
+This document explains the complete user journey through the BusUndo app, from first visit to logout, including all features and interactions.
 
 ---
 
@@ -12,7 +12,7 @@ This document explains the complete user journey through the Busundo app, from f
 
 #### **Step 1: Landing Page** (`/`)
 **What User Sees:**
-- Hero section with "Bus Undo? Open Busundo" tagline
+- Hero section with "Bus Undo? Open BusUndo" tagline
 - Search inputs (From/To) - *Currently non-functional*
 - Features showcase
 - How it works section
@@ -395,12 +395,12 @@ socket.on("location-update", (data) => {
 ```typescript
 // app/groups/[id]/page.tsx - Add copy and share
 const handleCopyLink = async () => {
-  await navigator.clipboard.writeText(`https://busundo.app/g/${group.id}`)
+  await navigator.clipboard.writeText(`https://BusUndo.app/g/${group.id}`)
   // Show toast notification
 }
 
 const handleShare = (platform: string) => {
-  const url = `https://busundo.app/g/${group.id}`
+  const url = `https://BusUndo.app/g/${group.id}`
   const text = `Join my travel group: ${route.source} → ${route.destination}`
   
   const shareUrls = {
@@ -498,7 +498,7 @@ const handleSignOut = async () => {
 
 #### **Step 11: Public Group View** (`/g/[id]`)
 **What User Sees:**
-- Busundo logo and "Sign in" button
+- BusUndo logo and "Sign in" button
 - Route and group information
 - Route stops timeline
 - Members list with status

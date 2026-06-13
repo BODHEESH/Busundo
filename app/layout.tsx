@@ -15,7 +15,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Busundo — Travel together, every day",
+  title: "BusUndo — Travel together, every day",
   description: "Find your travel crew for the daily commute.",
 };
 

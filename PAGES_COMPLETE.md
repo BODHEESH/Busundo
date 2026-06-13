@@ -1,8 +1,8 @@
-# Busundo - All 12 Pages Created ✅
+# BusUndo - All 12 Pages Created ✅
 
 ## Page Structure Complete
 
-All MVP pages have been successfully created for the Busundo app!
+All MVP pages have been successfully created for the BusUndo app!
 
 ---
 
@@ -131,7 +131,7 @@ muted: "#8E9C95"    // Secondary text
 ## 🧩 Reusable Components
 
 ### **Navigation**
-- `<Logo />` - Busundo logo with icon
+- `<Logo />` - BusUndo logo with icon
 - `<TopNav />` - Header with back button and profile
 
 ### **Status & Routes**

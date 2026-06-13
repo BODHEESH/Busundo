@@ -12,7 +12,7 @@ export default function LoginPage() {
             </span>
           </div>
           <h1 className="font-display text-3xl font-bold tracking-tight mb-2">
-            Welcome to Busundo
+            Welcome to BusUndo
           </h1>
           <p className="text-ink/60">
             Travel together, every day

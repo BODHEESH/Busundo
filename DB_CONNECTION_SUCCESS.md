@@ -2,7 +2,7 @@
 
 ## 🎉 Connection Established
 
-**Database:** Busundo  
+**Database:** BusUndo  
 **Provider:** MongoDB Atlas  
 **Status:** ✅ Connected and Ready
 
@@ -63,7 +63,7 @@ Expected Response:
 {
   "success": true,
   "message": "Database connected successfully!",
-  "database": "Busundo",
+  "database": "BusUndo",
   "collections": ["users", "routes", "groups", ...],
   "timestamp": "2026-06-14T..."
 }
@@ -172,7 +172,7 @@ export default async function DashboardPage() {
 
 ✅ Already configured in `.env.local`:
 ```env
-MONGODB_URI=mongodb+srv://brototypeTest:vcbodheesh@clusterfortest.yvsxay2.mongodb.net/Busundo
+MONGODB_URI=mongodb+srv://brototypeTest:vcbodheesh@clusterfortest.yvsxay2.mongodb.net/BusUndo
 ```
 
 ---
@@ -229,7 +229,7 @@ npm run seed
 ## 🎨 Project Structure
 
 ```
-h:\projects\Busundo\
+h:\projects\BusUndo\
 ├── lib/
 │   ├── mongodb.ts          ✅ Database connection
 │   └── models.ts           ✅ Collections & helpers
@@ -286,4 +286,4 @@ Then visit http://localhost:3001/api/test-db to verify the connection!
 **Lines Added:** 1,457  
 **Status:** ✅ Database fully integrated and ready to use!
 
-Your Busundo app is now connected to MongoDB and ready for backend development! 🎉
+Your BusUndo app is now connected to MongoDB and ready for backend development! 🎉

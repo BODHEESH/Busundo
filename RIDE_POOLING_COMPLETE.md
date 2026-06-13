@@ -221,7 +221,7 @@ User sees:
 
 ### **Landing Page** ✅
 ```
-Busundo | Search | Browse Routes | Bus Stops | Ride Pools | [Find Your Bus] | Admin
+BusUndo | Search | Browse Routes | Bus Stops | Ride Pools | [Find Your Bus] | Admin
 ```
 
 **New Link:**
@@ -405,7 +405,7 @@ http://localhost:3001/pools/my-pools
 
 ---
 
-**Busundo now has FULL RIDE POOLING functionality! 🚗✨**
+**BusUndo now has FULL RIDE POOLING functionality! 🚗✨**
 
 Users can create pools, join pools, and share their daily commute!
 

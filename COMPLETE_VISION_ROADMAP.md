@@ -1,8 +1,8 @@
-# 🚀 BUSUNDO - COMPLETE VISION ROADMAP
+# 🚀 BusUndo - COMPLETE VISION ROADMAP
 
 ## 🎯 Vision
 
-**"Busundo is a community-powered mobility platform that helps people discover routes, share rides, join travel communities, receive real-time transport updates, and move efficiently through local transportation networks."**
+**"BusUndo is a community-powered mobility platform that helps people discover routes, share rides, join travel communities, receive real-time transport updates, and move efficiently through local transportation networks."**
 
 **Tagline:** "Travel Together. Travel Smarter."
 
@@ -562,11 +562,11 @@ UserProfile {
 "A bus route finder for Kerala"
 
 **Say:**
-"Busundo is a community-powered mobility platform that helps people discover routes, share rides, join travel communities, receive real-time transport updates, and move efficiently through local transportation networks."
+"BusUndo is a community-powered mobility platform that helps people discover routes, share rides, join travel communities, receive real-time transport updates, and move efficiently through local transportation networks."
 
 **Tagline:**
 "Travel Together. Travel Smarter."
 
 ---
 
-**This is the complete roadmap to build Busundo from a bus finder into a full mobility ecosystem! 🚌✨**
+**This is the complete roadmap to build BusUndo from a bus finder into a full mobility ecosystem! 🚌✨**

@@ -1,10 +1,10 @@
-# Busundo - Community Bus Travel Platform
+# BusUndo - Community Bus Travel Platform
 
-**Tagline:** "Bus Undo? Open Busundo."
+**Tagline:** "Bus Undo? Open BusUndo."
 
 ## Overview
 
-Busundo is a community-powered bus travel platform designed for students, office workers, and daily commuters in Kerala. Unlike traditional bus apps that only provide schedules and routes, Busundo focuses on helping users coordinate travel with friends, classmates, and other commuters.
+BusUndo is a community-powered bus travel platform designed for students, office workers, and daily commuters in Kerala. Unlike traditional bus apps that only provide schedules and routes, BusUndo focuses on helping users coordinate travel with friends, classmates, and other commuters.
 
 ## Tech Stack
 
@@ -53,7 +53,7 @@ Busundo is a community-powered bus travel platform designed for students, office
 ## Project Structure
 
 ```
-busundo/
+BusUndo/
 ├── app/                    # Next.js app directory
 │   ├── (auth)/            # Authentication pages
 │   ├── dashboard/         # Dashboard pages
@@ -120,7 +120,7 @@ This is a private project for Kerala students. Contributions are welcome!
 
 ## License
 
-All rights reserved © 2024 Busundo
+All rights reserved © 2024 BusUndo
 
 ---
 

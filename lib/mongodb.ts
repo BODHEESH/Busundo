@@ -42,5 +42,5 @@ export default getClientPromise;
 // Helper function to get database
 export async function getDatabase(): Promise<Db> {
   const client = await getClientPromise();
-  return client.db("Busundo");
+  return client.db("BusUndo");
 }

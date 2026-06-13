@@ -1,5 +1,5 @@
 /**
- * Scrape busundo.in data (competitor analysis)
+ * Scrape BusUndo.in data (competitor analysis)
  * They have 1032+ stops already collected
  */
 
@@ -16,7 +16,7 @@ interface BusundoRoute {
 }
 
 class BusundoScraper {
-  private baseUrl = 'https://busundo.in';
+  private baseUrl = 'https://BusUndo.in';
   private axiosInstance;
 
   constructor() {
@@ -36,7 +36,7 @@ class BusundoScraper {
     try {
       console.log(`Searching: ${from} → ${to}...`);
 
-      // busundo.in uses a search API
+      // BusUndo.in uses a search API
       const response = await this.axiosInstance.get('/api/search', {
         params: {
           from,
@@ -78,11 +78,11 @@ class BusundoScraper {
   }
 
   /**
-   * Get all stops from busundo.in
+   * Get all stops from BusUndo.in
    */
   async getAllStops(): Promise<string[]> {
     try {
-      console.log('Fetching all stops from busundo.in...');
+      console.log('Fetching all stops from BusUndo.in...');
 
       // Try to get stops list (might be in homepage or API)
       const response = await this.axiosInstance.get('/api/stops');
@@ -170,7 +170,7 @@ class BusundoScraper {
 async function main() {
   const scraper = new BusundoScraper();
 
-  console.log('🕷️ busundo.in Scraper Started...\n');
+  console.log('🕷️ BusUndo.in Scraper Started...\n');
 
   try {
     // 1. Get all stops
