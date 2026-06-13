@@ -1,0 +1,27 @@
+import { NextResponse } from "next/server";
+import { leaveRidePool } from "@/lib/pool-models";
+import { ObjectId } from "mongodb";
+
+// Temporary user ID (replace with actual auth later)
+const TEMP_USER_ID = new ObjectId();
+
+export async function POST(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    
+    await leaveRidePool(id, TEMP_USER_ID);
+
+    return NextResponse.json({
+      success: true,
+      message: "Successfully left the pool",
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
+  }
+}
