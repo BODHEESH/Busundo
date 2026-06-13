@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Search, Bus, MapPin, ArrowRight, RefreshCw, CheckCircle2 } from "lucide-react";
@@ -34,7 +34,7 @@ interface SearchResult {
   requiresChange: boolean;
 }
 
-export default function SearchBusPage() {
+function SearchBusContent() {
   const searchParams = useSearchParams();
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -363,5 +363,26 @@ export default function SearchBusPage() {
         )}
       </div>
     </PageWrapper>
+  );
+}
+
+export default function SearchBusPage() {
+  return (
+    <Suspense fallback={
+      <PageWrapper
+        currentPage="search"
+        title="Find Your Bus"
+        description="Search for direct buses or one-change routes across Kerala"
+        gradient={true}
+      >
+        <div className="mx-auto max-w-4xl px-4">
+          <div className="text-center py-12">
+            <p className="text-white">Loading...</p>
+          </div>
+        </div>
+      </PageWrapper>
+    }>
+      <SearchBusContent />
+    </Suspense>
   );
 }

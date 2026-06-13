@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, Plus, Users, Car, Bike, MapPin, Clock, Calendar, IndianRupee } from "lucide-react";
+import PageWrapper from "@/components/shared/PageWrapper";
 
 interface Pool {
   _id: string;
@@ -65,32 +66,28 @@ export default function PoolsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-paper">
-      <div className="mx-auto max-w-6xl px-4 py-8">
-        {/* Header */}
-        <div className="mb-8 animate-fade-in">
+    <PageWrapper
+      currentPage="pools"
+      title="Ride Pooling"
+      description="Share rides, split costs, and travel together with fellow commuters"
+      gradient={true}
+    >
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="mb-8">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="font-display text-3xl font-bold tracking-tight">
-                Ride Pools
-              </h1>
-              <p className="mt-2 text-ink/60">
-                Share rides, split costs, travel together
-              </p>
-            </div>
             <Link
               href="/pools/create"
-              className="flex items-center gap-2 rounded-lg bg-gradient-travel px-4 py-2 text-sm font-medium text-white hover:shadow-lg transition-all"
+              className="flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-600 to-pink-700 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
               <Plus className="h-4 w-4" />
-              Create Pool
+              Create New Pool
             </Link>
           </div>
         </div>
 
         {/* Search */}
-        <form onSubmit={handleSearch} className="mb-8 animate-slide-in-up">
-          <div className="rounded-xl2 border border-line bg-white p-6">
+        <form onSubmit={handleSearch} className="mb-8">
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
             <div className="grid gap-4 md:grid-cols-3">
               <div>
                 <label htmlFor="from" className="block text-sm font-medium mb-2">
@@ -121,7 +118,7 @@ export default function PoolsPage() {
               <div className="flex items-end">
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-transit px-6 py-2 font-medium text-white hover:bg-transit-dark transition-all flex items-center justify-center gap-2"
+                  className="w-full rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-2.5 font-semibold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 flex items-center justify-center gap-2"
                 >
                   <Search className="h-4 w-4" />
                   Search Pools
@@ -140,17 +137,17 @@ export default function PoolsPage() {
 
         {/* Pools List */}
         {!loading && (
-          <div className="space-y-4 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
+          <div className="space-y-6">
             {pools.length === 0 && (
-              <div className="text-center py-12 rounded-xl2 border border-line bg-white">
-                <Users className="h-12 w-12 text-ink/20 mx-auto mb-4" />
-                <p className="text-ink/60 mb-4">No pools found</p>
+              <div className="text-center py-16 rounded-2xl border border-gray-200 bg-white shadow-lg">
+                <Users className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-600 mb-6 text-lg">No pools found</p>
                 <Link
                   href="/pools/create"
-                  className="inline-flex items-center gap-2 text-sm text-transit hover:underline"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-600 to-pink-700 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
                 >
                   <Plus className="h-4 w-4" />
-                  Create the first pool
+                  Create the First Pool
                 </Link>
               </div>
             )}
@@ -159,20 +156,20 @@ export default function PoolsPage() {
               <Link
                 key={pool._id}
                 href={`/pools/${pool._id}`}
-                className="block rounded-xl2 border border-line bg-white p-6 hover:border-transit transition-all"
+                className="group block rounded-2xl border border-gray-200 bg-white p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1 hover:border-pink-200"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     {/* Route */}
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-transit/10">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 text-white shadow-md group-hover:scale-110 transition-transform">
                         {getVehicleIcon(pool.vehicleType)}
                       </div>
                       <div>
-                        <h3 className="font-display font-bold text-lg">
+                        <h3 className="font-bold text-xl text-gray-900 group-hover:text-pink-600 transition-colors">
                           {pool.route.from} → {pool.route.to}
                         </h3>
-                        <p className="text-sm text-ink/60 capitalize">
+                        <p className="text-sm text-gray-500 capitalize">
                           {pool.vehicleType}
                         </p>
                       </div>
@@ -245,6 +242,6 @@ export default function PoolsPage() {
           </div>
         )}
       </div>
-    </main>
+    </PageWrapper>
   );
 }
