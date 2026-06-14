@@ -56,58 +56,66 @@ export default function ViewStopsPage() {
   }, {} as Record<string, Stop[]>);
 
   return (
-    <main className="min-h-screen bg-paper">
-      <div className="mx-auto max-w-6xl px-4 py-8">
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-green-50/20">
+      <div className="mx-auto max-w-7xl px-4 py-12">
         {/* Header */}
-        <div className="mb-8 animate-fade-in">
+        <div className="mb-10 animate-fade-in">
           <Link
             href="/admin"
-            className="inline-flex items-center gap-2 text-sm text-transit hover:underline mb-4"
+            className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium mb-6 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Admin
           </Link>
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="font-display text-3xl font-bold tracking-tight">
-                All Bus Stops
-              </h1>
-              <p className="mt-2 text-ink/60">
-                Manage all bus stops in the database
-              </p>
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg shadow-green-500/30">
+                <MapPin className="h-7 w-7 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">
+                  All Bus Stops
+                </h1>
+                <p className="mt-1 text-gray-600">
+                  Manage all bus stops in the database
+                </p>
+              </div>
             </div>
             <Link
               href="/admin/stops/add"
-              className="flex items-center gap-2 rounded-lg bg-gradient-travel px-4 py-2 text-sm font-medium text-white hover:shadow-lg transition-all"
+              className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:scale-105 transition-all"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-5 w-5" />
               Add Stop
             </Link>
           </div>
         </div>
 
         {/* Stats & Filter */}
-        <div className="mb-8 space-y-4 animate-slide-in-up">
-          <div className="rounded-xl2 border border-line bg-white p-6">
+        <div className="mb-10 grid gap-6 md:grid-cols-2 animate-slide-in-up">
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-ink/60">Total Stops</p>
-                <p className="mt-1 font-display text-3xl font-bold">{stops.length}</p>
+                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Stops</p>
+                <p className="mt-2 text-5xl font-bold text-gray-900">{stops.length}</p>
+                <p className="mt-2 text-sm text-gray-500">Bus stops across all taluks</p>
               </div>
-              <MapPin className="h-8 w-8 text-signal/20" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg shadow-green-500/30">
+                <MapPin className="h-10 w-10 text-white" />
+              </div>
             </div>
           </div>
 
           {/* Filter */}
-          <div className="rounded-xl2 border border-line bg-white p-4">
-            <label htmlFor="taluk-filter" className="block text-sm font-medium mb-2">
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
+            <label htmlFor="taluk-filter" className="block text-sm font-semibold text-gray-700 mb-3">
               Filter by Taluk
             </label>
             <select
               id="taluk-filter"
               value={filterTaluk}
               onChange={(e) => setFilterTaluk(e.target.value)}
-              className="w-full rounded-lg border border-line px-4 py-2 focus:border-transit focus:outline-none focus:ring-2 focus:ring-transit/20"
+              className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm font-medium focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             >
               <option value="all">All Taluks ({stops.length} stops)</option>
               {taluks.map(taluk => {
@@ -125,7 +133,7 @@ export default function ViewStopsPage() {
         {/* Loading */}
         {loading && (
           <div className="text-center py-12">
-            <p className="text-ink/60">Loading stops...</p>
+            <p className="text-gray-500">Loading stops...</p>
           </div>
         )}
 
@@ -141,25 +149,26 @@ export default function ViewStopsPage() {
           <div className="space-y-8 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
             {Object.entries(stopsByTaluk).map(([taluk, talukStops]) => (
               <div key={taluk}>
-                <h2 className="font-display text-xl font-bold mb-4">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                  <div className="h-1 w-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full"></div>
                   {taluk} ({talukStops.length} stops)
                 </h2>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {talukStops.map((stop, index) => (
                     <div
                       key={stop._id}
-                      className="rounded-xl2 border border-line bg-white p-4 hover:border-signal transition-all"
+                      className="group rounded-2xl border border-gray-200 bg-white p-5 hover:border-green-500 hover:shadow-xl transition-all duration-300 cursor-pointer"
                       style={{ animationDelay: `${0.1 + index * 0.02}s` }}
                     >
                       <div className="flex items-start gap-3">
-                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-signal/10">
-                          <MapPin className="h-5 w-5 text-signal" />
+                        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-md group-hover:shadow-lg transition-shadow">
+                          <MapPin className="h-6 w-6 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-medium truncate">
+                          <h3 className="font-bold text-gray-900 truncate group-hover:text-green-600 transition-colors">
                             {stop.stopName}
                           </h3>
-                          <p className="text-xs text-ink/40 mt-1">
+                          <p className="text-xs text-gray-400 mt-1">
                             {stop.district}
                           </p>
                           {stop.verified && (
@@ -183,11 +192,11 @@ export default function ViewStopsPage() {
 
             {filteredStops.length === 0 && (
               <div className="text-center py-12">
-                <MapPin className="h-12 w-12 text-ink/20 mx-auto mb-4" />
-                <p className="text-ink/60">No stops found</p>
+                <MapPin className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-500">No stops found</p>
                 <Link
                   href="/admin/stops/add"
-                  className="mt-4 inline-flex items-center gap-2 text-sm text-transit hover:underline"
+                  className="mt-4 inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700"
                 >
                   <Plus className="h-4 w-4" />
                   Add your first stop

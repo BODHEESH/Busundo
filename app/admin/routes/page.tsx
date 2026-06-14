@@ -41,51 +41,59 @@ export default function ViewRoutesPage() {
   };
 
   return (
-    <main className="min-h-screen bg-paper">
-      <div className="mx-auto max-w-6xl px-4 py-8">
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <div className="mx-auto max-w-7xl px-4 py-12">
         {/* Header */}
-        <div className="mb-8 animate-fade-in">
+        <div className="mb-10 animate-fade-in">
           <Link
             href="/admin"
-            className="inline-flex items-center gap-2 text-sm text-transit hover:underline mb-4"
+            className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium mb-6 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Admin
           </Link>
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="font-display text-3xl font-bold tracking-tight">
-                All Routes
-              </h1>
-              <p className="mt-2 text-ink/60">
-                Manage all bus routes in the database
-              </p>
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30">
+                <Bus className="h-7 w-7 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">
+                  All Routes
+                </h1>
+                <p className="mt-1 text-gray-600">
+                  Manage all bus routes in the database
+                </p>
+              </div>
             </div>
             <Link
               href="/admin/routes/add"
-              className="flex items-center gap-2 rounded-lg bg-gradient-travel px-4 py-2 text-sm font-medium text-white hover:shadow-lg transition-all"
+              className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:scale-105 transition-all"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-5 w-5" />
               Add Route
             </Link>
           </div>
         </div>
 
         {/* Stats */}
-        <div className="mb-8 rounded-xl2 border border-line bg-white p-6 animate-slide-in-up">
+        <div className="mb-10 rounded-2xl border border-gray-200 bg-white p-8 shadow-lg animate-slide-in-up">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-ink/60">Total Routes</p>
-              <p className="mt-1 font-display text-3xl font-bold">{routes.length}</p>
+              <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Routes</p>
+              <p className="mt-2 text-5xl font-bold text-gray-900">{routes.length}</p>
+              <p className="mt-2 text-sm text-gray-500">Active bus routes in system</p>
             </div>
-            <Bus className="h-8 w-8 text-transit/20" />
+            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30">
+              <Bus className="h-10 w-10 text-white" />
+            </div>
           </div>
         </div>
 
         {/* Loading */}
         {loading && (
           <div className="text-center py-12">
-            <p className="text-ink/60">Loading routes...</p>
+            <p className="text-gray-500">Loading routes...</p>
           </div>
         )}
 
@@ -102,36 +110,36 @@ export default function ViewRoutesPage() {
             {routes.map((route, index) => (
               <div
                 key={route._id}
-                className="rounded-xl2 border border-line bg-white p-6 hover:border-transit transition-all"
+                className="group rounded-2xl border border-gray-200 bg-white p-6 hover:border-blue-500 hover:shadow-xl transition-all duration-300 cursor-pointer"
                 style={{ animationDelay: `${0.1 + index * 0.05}s` }}
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-transit/10">
-                        <Bus className="h-5 w-5 text-transit" />
+                    <div className="flex items-center gap-4 mb-3">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-md group-hover:shadow-lg transition-shadow">
+                        <Bus className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-display text-lg font-bold">
+                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
                           {route.routeId}
                         </h3>
-                        <p className="text-sm text-ink/60">{route.routeName}</p>
+                        <p className="text-sm text-gray-600 font-medium">{route.routeName}</p>
                       </div>
                     </div>
 
-                    <div className="ml-13 flex items-center gap-6 text-sm">
-                      <div>
-                        <span className="text-ink/40">District:</span>{" "}
-                        <span className="font-medium">{route.district}</span>
+                    <div className="ml-16 flex items-center gap-8 text-sm">
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-400 font-medium">District:</span>
+                        <span className="font-semibold text-gray-900">{route.district}</span>
                       </div>
-                      <div>
-                        <span className="text-ink/40">Stops:</span>{" "}
-                        <span className="font-medium">{route.stopsCount}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-400 font-medium">Stops:</span>
+                        <span className="font-semibold text-gray-900">{route.stopsCount}</span>
                       </div>
                       {route.verified && (
-                        <div className="flex items-center gap-1 text-green-600">
+                        <div className="flex items-center gap-1.5 text-green-600 font-medium">
                           <CheckCircle2 className="h-4 w-4" />
-                          <span>Verified by {route.verifiedBy}</span>
+                          <span className="text-xs">Verified by {route.verifiedBy}</span>
                         </div>
                       )}
                     </div>
@@ -150,11 +158,11 @@ export default function ViewRoutesPage() {
 
             {routes.length === 0 && (
               <div className="text-center py-12">
-                <Bus className="h-12 w-12 text-ink/20 mx-auto mb-4" />
-                <p className="text-ink/60">No routes found</p>
+                <Bus className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-500">No routes found</p>
                 <Link
                   href="/admin/routes/add"
-                  className="mt-4 inline-flex items-center gap-2 text-sm text-transit hover:underline"
+                  className="mt-4 inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700"
                 >
                   <Plus className="h-4 w-4" />
                   Add your first route

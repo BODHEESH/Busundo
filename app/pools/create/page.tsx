@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Car, Bike, Users as UsersIcon, CheckCircle2, AlertCircle } from "lucide-react";
+import { ArrowLeft, Car, Bike, Bus, Users as UsersIcon, CheckCircle2, AlertCircle } from "lucide-react";
 import PageWrapper from "@/components/shared/PageWrapper";
 
 export default function CreatePoolPage() {
@@ -15,7 +15,7 @@ export default function CreatePoolPage() {
     days: [] as string[],
     seatsAvailable: 3,
     costPerPerson: "",
-    vehicleType: "car" as "car" | "bike" | "auto" | "van",
+    vehicleType: "car" as "car" | "bike" | "auto" | "van" | "bus",
     description: "",
   });
   const [loading, setLoading] = useState(false);
@@ -79,32 +79,26 @@ export default function CreatePoolPage() {
       description="Share your ride and split costs with fellow commuters"
       gradient={true}
     >
-      <div className="mx-auto max-w-3xl px-4">
-        <div className="mb-8">
+      <div className="mx-auto max-w-4xl px-4">
+        <div className="mb-4">
           <Link
             href="/pools"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-4 transition-colors text-sm font-medium bg-white px-4 py-2 rounded-lg shadow-sm"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Pools
           </Link>
-          <h1 className="text-4xl font-bold text-white mb-4">
-            Create Ride Pool
-          </h1>
-          <p className="text-lg text-blue-100">
-            Share your daily commute and save costs
-          </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-8">
-          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-md">
             {/* Route */}
-            <div className="mb-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Route Details</h3>
-              <div className="grid gap-4 md:grid-cols-2">
+            <div className="mb-5">
+              <h3 className="text-base font-bold text-gray-900 mb-3">Route Details</h3>
+              <div className="grid gap-3 md:grid-cols-2">
                 <div>
-                  <label htmlFor="from" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="from" className="block text-sm font-medium text-gray-700 mb-1.5">
                     From <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -113,12 +107,12 @@ export default function CreatePoolPage() {
                     value={formData.from}
                     onChange={(e) => setFormData({ ...formData, from: e.target.value })}
                     placeholder="Mullassery"
-                    className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="to" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="to" className="block text-sm font-medium text-gray-700 mb-1.5">
                     To <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -127,7 +121,7 @@ export default function CreatePoolPage() {
                     value={formData.to}
                     onChange={(e) => setFormData({ ...formData, to: e.target.value })}
                     placeholder="Infopark"
-                    className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                     required
                   />
                 </div>
@@ -135,149 +129,175 @@ export default function CreatePoolPage() {
             </div>
 
             {/* Time & Days */}
-            <div className="mb-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Schedule</h3>
+            <div className="mb-5">
+              <h3 className="text-base font-bold text-gray-900 mb-3">Schedule</h3>
               
-              <div className="mb-4">
-                <label htmlFor="time" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Departure Time <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="time"
-                  id="time"
-                  value={formData.departureTime}
-                  onChange={(e) => setFormData({ ...formData, departureTime: e.target.value })}
-                  className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Days <span className="text-red-500">*</span>
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {weekDays.map(day => (
-                    <button
-                      key={day}
-                      type="button"
-                      onClick={() => toggleDay(day)}
-                      className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all ${
-                        formData.days.includes(day)
-                          ? "bg-gradient-to-r from-pink-600 to-pink-700 text-white shadow-md"
-                          : "bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200"
-                      }`}
-                    >
-                      {day}
-                    </button>
-                  ))}
+              <div className="grid gap-3 md:grid-cols-2">
+                <div>
+                  <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Departure Time <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="time"
+                    id="time"
+                    value={formData.departureTime}
+                    onChange={(e) => setFormData({ ...formData, departureTime: e.target.value })}
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    required
+                  />
                 </div>
-                {formData.days.length === 0 && (
-                  <p className="mt-1 text-xs text-signal">Please select at least one day</p>
-                )}
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Days <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {weekDays.map(day => (
+                      <button
+                        key={day}
+                        type="button"
+                        onClick={() => toggleDay(day)}
+                        className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
+                          formData.days.includes(day)
+                            ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
+                            : "bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200"
+                        }`}
+                      >
+                        {day}
+                      </button>
+                    ))}
+                  </div>
+                  {formData.days.length === 0 && (
+                    <p className="mt-1 text-xs text-red-500">Please select at least one day</p>
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Vehicle & Seats */}
-            <div className="mb-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Vehicle Details</h3>
+            <div className="mb-5">
+              <h3 className="text-base font-bold text-gray-900 mb-3">Vehicle Details</h3>
               
-              <div className="mb-4">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Vehicle Type <span className="text-red-500">*</span>
-                </label>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {[
-                    { value: "car", label: "Car", icon: Car },
-                    { value: "bike", label: "Bike", icon: Bike },
-                    { value: "auto", label: "Auto", icon: UsersIcon },
-                    { value: "van", label: "Van", icon: Car },
-                  ].map(({ value, label, icon: Icon }) => (
-                    <button
-                      key={value}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, vehicleType: value as any })}
-                      className={`rounded-xl border-2 p-4 flex flex-col items-center gap-2 transition-all cursor-pointer ${
-                        formData.vehicleType === value
-                          ? "border-pink-500 bg-pink-50 shadow-md"
-                          : "border-gray-200 hover:border-pink-300 hover:bg-pink-50/50"
-                      }`}
-                    >
-                      <Icon className="h-6 w-6" />
-                      <span className="text-sm font-medium">{label}</span>
-                    </button>
-                  ))}
+              <div className="grid gap-3 md:grid-cols-2">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Vehicle Type <span className="text-red-500">*</span>
+                  </label>
+                  <div className="grid grid-cols-5 gap-2">
+                    {[
+                      { value: "bus", label: "Bus", icon: Bus, free: true, color: "green" },
+                      { value: "car", label: "Car", icon: Car, free: false, color: "blue" },
+                      { value: "bike", label: "Bike", icon: Bike, free: false, color: "blue" },
+                      { value: "auto", label: "Auto", icon: UsersIcon, free: false, color: "blue" },
+                      { value: "van", label: "Van", icon: Car, free: false, color: "blue" },
+                    ].map(({ value, label, icon: Icon, free, color }) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setFormData({
+                          ...formData,
+                          vehicleType: value as any,
+                          costPerPerson: free ? "0" : (formData.costPerPerson === "0" ? "" : formData.costPerPerson)
+                        })}
+                        className={`relative rounded-lg border-2 p-2 flex flex-col items-center gap-1 transition-all cursor-pointer ${
+                          formData.vehicleType === value
+                            ? color === "green"
+                              ? "border-green-500 bg-green-50 shadow-md"
+                              : "border-blue-500 bg-blue-50 shadow-md"
+                            : color === "green"
+                              ? "border-gray-200 hover:border-green-300 hover:bg-green-50/50"
+                              : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50"
+                        }`}
+                      >
+                        {free && (
+                          <span className="absolute -top-1.5 -right-1.5 bg-green-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">FREE</span>
+                        )}
+                        <Icon className={`h-4 w-4 ${color === "green" ? "text-green-600" : ""}`} />
+                        <span className="text-xs font-medium">{label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="seats" className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Available Seats <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="seats"
+                    min="1"
+                    max="10"
+                    value={formData.seatsAvailable}
+                    onChange={(e) => setFormData({ ...formData, seatsAvailable: parseInt(e.target.value) })}
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    required
+                  />
                 </div>
               </div>
+            </div>
 
+            {/* Cost & Description */}
+            <div className="grid gap-3 md:grid-cols-2">
+              {formData.vehicleType === "bus" ? (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Cost Per Person
+                  </label>
+                  <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-3 py-2.5">
+                    <span className="text-green-700 font-bold">Free</span>
+                    <span className="text-xs text-green-600">- Networking & Grouping</span>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <label htmlFor="cost" className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Cost Per Person (₹) <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="cost"
+                    min="0"
+                    step="10"
+                    value={formData.costPerPerson}
+                    onChange={(e) => setFormData({ ...formData, costPerPerson: e.target.value })}
+                    placeholder="50"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    required
+                  />
+                </div>
+              )}
               <div>
-                <label htmlFor="seats" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Available Seats <span className="text-red-500">*</span>
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1.5">
+                  Description (Optional)
                 </label>
-                <input
-                  type="number"
-                  id="seats"
-                  min="1"
-                  max="10"
-                  value={formData.seatsAvailable}
-                  onChange={(e) => setFormData({ ...formData, seatsAvailable: parseInt(e.target.value) })}
-                  className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
-                  required
+                <textarea
+                  id="description"
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  placeholder={formData.vehicleType === "bus" ? "Bus route details, timing, etc..." : "Any additional details..."}
+                  rows={2}
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
                 />
               </div>
             </div>
 
-            {/* Cost */}
-            <div className="mb-8">
-              <label htmlFor="cost" className="block text-sm font-semibold text-gray-700 mb-2">
-                Cost Per Person (₹) <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                id="cost"
-                min="0"
-                step="10"
-                value={formData.costPerPerson}
-                onChange={(e) => setFormData({ ...formData, costPerPerson: e.target.value })}
-                placeholder="50"
-                className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
-                required
-              />
-              <p className="mt-2 text-sm text-gray-500">
-                💡 Suggested cost per person for this route
-              </p>
-            </div>
-
-            {/* Description */}
-            <div>
-              <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
-                Description (Optional)
-              </label>
-              <textarea
-                id="description"
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Any additional details about the pool..."
-                rows={3}
-                className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
-              />
-            </div>
           </div>
 
           {/* Message */}
           {message && (
             <div
-              className={`rounded-2xl border p-6 shadow-lg animate-fade-in-up ${
+              className={`rounded-lg border p-3 shadow-md ${
                 message.type === "success"
                   ? "border-green-300 bg-green-50"
                   : "border-red-300 bg-red-50"
               }`}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 {message.type === "success" ? (
-                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
                 ) : (
-                  <AlertCircle className="h-5 w-5 text-red-600" />
+                  <AlertCircle className="h-4 w-4 text-red-600" />
                 )}
                 <p
                   className={`text-sm font-medium ${
@@ -291,17 +311,21 @@ export default function CreatePoolPage() {
           )}
 
           {/* Submit */}
-          <div className="pt-4">
+          <div>
             <button
               type="submit"
               disabled={loading || formData.days.length === 0}
-              className="w-full rounded-full bg-gradient-to-r from-pink-600 to-pink-700 px-8 py-4 text-lg font-semibold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              className={`w-full rounded-lg px-8 py-2.5 text-base font-semibold text-white shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                formData.vehicleType === 'bus'
+                  ? 'bg-gradient-to-r from-green-600 to-green-700'
+                  : 'bg-gradient-to-r from-blue-600 to-blue-700'
+              }`}
             >
               {loading ? "Creating Pool..." : "Create Ride Pool"}
             </button>
             {formData.days.length === 0 && (
-              <p className="mt-3 text-sm text-red-500 text-center font-medium">
-                ⚠️ Please select at least one day to create a pool
+              <p className="mt-2 text-xs text-red-500 text-center font-medium">
+                Please select at least one day to create a pool
               </p>
             )}
           </div>

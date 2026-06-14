@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, XCircle, MapPin, ThumbsUp, ThumbsDown } from "lucide-react";
+import { ArrowLeft, CheckCircle2, XCircle, MapPin, ThumbsUp, ThumbsDown, MessageSquare } from "lucide-react";
 
 interface Suggestion {
   _id: string;
@@ -71,42 +71,49 @@ export default function AdminSuggestionsPage() {
   const approvedSuggestions = suggestions.filter(s => s.status === "approved");
 
   return (
-    <main className="min-h-screen bg-paper">
-      <div className="mx-auto max-w-6xl px-4 py-8">
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50/20">
+      <div className="mx-auto max-w-7xl px-4 py-12">
         {/* Header */}
-        <div className="mb-8 animate-fade-in">
+        <div className="mb-10 animate-fade-in">
           <Link
             href="/admin"
-            className="inline-flex items-center gap-2 text-sm text-transit hover:underline mb-4"
+            className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium mb-6 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Admin
           </Link>
-          <h1 className="font-display text-3xl font-bold tracking-tight">
-            Community Suggestions
-          </h1>
-          <p className="mt-2 text-ink/60">
-            Review and approve suggestions from users
-          </p>
+          <div className="flex items-center gap-4 mb-3">
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg shadow-orange-500/30">
+              <MessageSquare className="h-7 w-7 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">
+                Community Suggestions
+              </h1>
+              <p className="mt-1 text-gray-600">
+                Review and approve suggestions from users
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Stats */}
-        <div className="mb-8 grid gap-4 md:grid-cols-3 animate-slide-in-up">
-          <div className="rounded-xl2 border border-line bg-white p-6">
-            <p className="text-sm text-ink/60">Pending</p>
-            <p className="mt-1 font-display text-3xl font-bold text-orange-600">
+        <div className="mb-10 grid gap-6 md:grid-cols-3 animate-slide-in-up">
+          <div className="rounded-2xl border border-gray-200 shadow-lg bg-white p-8">
+            <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Pending</p>
+            <p className="mt-2 text-5xl font-bold text-orange-600">
               {pendingSuggestions.length}
             </p>
           </div>
-          <div className="rounded-xl2 border border-line bg-white p-6">
-            <p className="text-sm text-ink/60">Approved</p>
-            <p className="mt-1 font-display text-3xl font-bold text-green-600">
+          <div className="rounded-2xl border border-gray-200 shadow-lg bg-white p-8">
+            <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Approved</p>
+            <p className="mt-2 text-5xl font-bold text-green-600">
               {approvedSuggestions.length}
             </p>
           </div>
-          <div className="rounded-xl2 border border-line bg-white p-6">
-            <p className="text-sm text-ink/60">Total</p>
-            <p className="mt-1 font-display text-3xl font-bold">
+          <div className="rounded-2xl border border-gray-200 shadow-lg bg-white p-8">
+            <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total</p>
+            <p className="mt-2 text-5xl font-bold text-gray-900">
               {suggestions.length}
             </p>
           </div>
@@ -115,7 +122,7 @@ export default function AdminSuggestionsPage() {
         {/* Loading */}
         {loading && (
           <div className="text-center py-12">
-            <p className="text-ink/60">Loading suggestions...</p>
+            <p className="text-gray-500">Loading suggestions...</p>
           </div>
         )}
 
@@ -132,8 +139,8 @@ export default function AdminSuggestionsPage() {
             {/* Pending */}
             {pendingSuggestions.length > 0 && (
               <div>
-                <h2 className="font-display text-xl font-bold mb-4 flex items-center gap-2">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-100 text-xs font-bold text-orange-600">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-sm font-bold text-white shadow-md">
                     {pendingSuggestions.length}
                   </span>
                   Pending Review
@@ -143,19 +150,19 @@ export default function AdminSuggestionsPage() {
                   {pendingSuggestions.map((suggestion) => (
                     <div
                       key={suggestion._id}
-                      className="rounded-xl2 border border-line bg-white p-6 hover:border-transit transition-all"
+                      className="group rounded-2xl border border-gray-200 bg-white p-6 hover:border-orange-500 hover:shadow-xl transition-all duration-300"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-signal/10">
-                              <MapPin className="h-5 w-5 text-signal" />
+                            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-md group-hover:shadow-lg transition-shadow">
+                              <MapPin className="h-6 w-6 text-white" />
                             </div>
                             <div>
-                              <h3 className="font-display font-bold">
+                              <h3 className="font-bold text-lg text-gray-900 group-hover:text-orange-600 transition-colors">
                                 {suggestion.stopName}
                               </h3>
-                              <p className="text-sm text-ink/60">
+                              <p className="text-sm text-gray-600">
                                 {suggestion.type === "missing_stop"
                                   ? `Missing stop on route ${suggestion.routeId}`
                                   : suggestion.type}
@@ -166,8 +173,8 @@ export default function AdminSuggestionsPage() {
                           <div className="ml-13 flex items-center gap-6 text-sm">
                             {suggestion.district && (
                               <div>
-                                <span className="text-ink/40">District:</span>{" "}
-                                <span className="font-medium">{suggestion.district}</span>
+                                <span className="text-gray-400">District:</span>{" "}
+                                <span className="font-medium text-gray-900">{suggestion.district}</span>
                               </div>
                             )}
                             <div className="flex items-center gap-4">
@@ -181,7 +188,7 @@ export default function AdminSuggestionsPage() {
                               </span>
                             </div>
                             <div>
-                              <span className="text-xs text-ink/40">
+                              <span className="text-xs text-gray-400">
                                 {new Date(suggestion.createdAt).toLocaleDateString()}
                               </span>
                             </div>
@@ -192,14 +199,14 @@ export default function AdminSuggestionsPage() {
                           <button
                             onClick={() => handleApprove(suggestion._id)}
                             disabled={processingId === suggestion._id}
-                            className="flex items-center gap-2 rounded-lg bg-green-100 px-4 py-2 text-sm font-medium text-green-700 hover:bg-green-200 transition-all disabled:opacity-50"
+                            className="flex items-center gap-2 rounded-xl bg-green-100 px-5 py-2.5 text-sm font-bold text-green-700 hover:bg-green-200 hover:shadow-md transition-all disabled:opacity-50"
                           >
                             <CheckCircle2 className="h-4 w-4" />
                             Approve
                           </button>
                           <button
                             disabled={processingId === suggestion._id}
-                            className="flex items-center gap-2 rounded-lg bg-red-100 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-200 transition-all disabled:opacity-50"
+                            className="flex items-center gap-2 rounded-xl bg-red-100 px-5 py-2.5 text-sm font-bold text-red-700 hover:bg-red-200 hover:shadow-md transition-all disabled:opacity-50"
                           >
                             <XCircle className="h-4 w-4" />
                             Reject
@@ -211,7 +218,7 @@ export default function AdminSuggestionsPage() {
                       {suggestion.approvals > 0 && suggestion.approvals < 5 && (
                         <div className="mt-4 ml-13">
                           <div className="flex items-center gap-2 mb-1">
-                            <p className="text-xs text-ink/60">
+                            <p className="text-xs text-gray-500">
                               {suggestion.approvals}/5 approvals for auto-approval
                             </p>
                           </div>
@@ -232,8 +239,10 @@ export default function AdminSuggestionsPage() {
             {/* Approved */}
             {approvedSuggestions.length > 0 && (
               <div>
-                <h2 className="font-display text-xl font-bold mb-4 flex items-center gap-2">
-                  <CheckCircle2 className="h-6 w-6 text-green-600" />
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-md">
+                    <CheckCircle2 className="h-5 w-5 text-white" />
+                  </div>
                   Approved
                 </h2>
 
@@ -241,14 +250,14 @@ export default function AdminSuggestionsPage() {
                   {approvedSuggestions.map((suggestion) => (
                     <div
                       key={suggestion._id}
-                      className="rounded-xl2 border border-green-200 bg-green-50 p-6"
+                      className="rounded-2xl border border-green-200 bg-gradient-to-br from-green-50 to-green-100/50 p-6 shadow-md"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100">
                           <MapPin className="h-5 w-5 text-green-600" />
                         </div>
                         <div>
-                          <h3 className="font-display font-bold text-green-900">
+                          <h3 className="font-bold text-green-900">
                             {suggestion.stopName}
                           </h3>
                           <p className="text-sm text-green-700">
@@ -265,9 +274,9 @@ export default function AdminSuggestionsPage() {
             {/* Empty State */}
             {suggestions.length === 0 && (
               <div className="text-center py-12">
-                <MapPin className="h-12 w-12 text-ink/20 mx-auto mb-4" />
-                <p className="text-ink/60">No suggestions yet</p>
-                <p className="text-sm text-ink/40 mt-2">
+                <MapPin className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-500">No suggestions yet</p>
+                <p className="text-sm text-gray-400 mt-2">
                   Suggestions from users will appear here
                 </p>
               </div>

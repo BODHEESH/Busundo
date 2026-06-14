@@ -104,162 +104,132 @@ function SearchBusContent() {
       description="Search for direct buses or one-change routes across Kerala"
       gradient={true}
     >
-      <div className="mx-auto max-w-4xl px-4">{/* Content wrapper */}
-
-        {/* Search Form */}
-        <form onSubmit={handleSearch} className="mb-8">
-          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
-            <div className="space-y-6">
-              {/* From */}
-              <div>
-                <label htmlFor="from" className="block text-sm font-medium mb-2">
-                  From
-                </label>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink/40" />
-                  <input
-                    type="text"
-                    id="from"
-                    value={from}
-                    onChange={(e) => setFrom(e.target.value)}
-                    placeholder="Mullassery"
-                    className="w-full rounded-lg border border-line pl-11 pr-4 py-3 focus:border-transit focus:outline-none focus:ring-2 focus:ring-transit/20"
-                  />
+      <div className="mx-auto max-w-5xl px-4">
+        {/* Search Form - Google Maps Style */}
+        <form onSubmit={handleSearch} className="mb-6">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div className="flex items-center gap-3 p-4">
+              {/* From Input */}
+              <div className="flex-1 relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2">
+                  <div className="h-2 w-2 rounded-full bg-blue-500"></div>
                 </div>
+                <input
+                  type="text"
+                  id="from"
+                  value={from}
+                  onChange={(e) => setFrom(e.target.value)}
+                  placeholder="Starting point"
+                  className="w-full pl-8 pr-4 py-3 text-base border-0 focus:outline-none focus:ring-0 placeholder-gray-400"
+                />
               </div>
 
               {/* Swap Button */}
-              <div className="flex justify-center">
-                <button
-                  type="button"
-                  onClick={handleSwap}
-                  className="rounded-full border border-line bg-white p-2 hover:bg-gray-50 transition-all"
-                >
-                  <RefreshCw className="h-5 w-5 text-ink/60" />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handleSwap}
+                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <RefreshCw className="h-5 w-5 text-gray-500" />
+              </button>
 
-              {/* To */}
-              <div>
-                <label htmlFor="to" className="block text-sm font-medium mb-2">
-                  To
-                </label>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-signal" />
-                  <input
-                    type="text"
-                    id="to"
-                    value={to}
-                    onChange={(e) => setTo(e.target.value)}
-                    placeholder="Sakthan Stand"
-                    className="w-full rounded-lg border border-line pl-11 pr-4 py-3 focus:border-transit focus:outline-none focus:ring-2 focus:ring-transit/20"
-                  />
+              {/* To Input */}
+              <div className="flex-1 relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2">
+                  <div className="h-2 w-2 rounded-full bg-red-500"></div>
                 </div>
+                <input
+                  type="text"
+                  id="to"
+                  value={to}
+                  onChange={(e) => setTo(e.target.value)}
+                  placeholder="Destination"
+                  className="w-full pl-8 pr-4 py-3 text-base border-0 focus:outline-none focus:ring-0 placeholder-gray-400"
+                />
               </div>
-            </div>
 
-            {/* Search Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-6 w-full rounded-lg bg-gradient-travel px-6 py-3 font-medium text-white transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {loading ? (
-                <>
+              {/* Search Button */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 font-medium"
+              >
+                {loading ? (
                   <RefreshCw className="h-5 w-5 animate-spin" />
-                  Searching...
-                </>
-              ) : (
-                <>
+                ) : (
                   <Search className="h-5 w-5" />
-                  Search Buses
-                </>
-              )}
-            </button>
+                )}
+                <span className="hidden sm:inline">Search</span>
+              </button>
+            </div>
           </div>
         </form>
 
         {/* Error */}
         {error && (
-          <div className="mb-8 rounded-lg border border-red-200 bg-red-50 p-4 animate-slide-in-up">
-            <p className="text-sm text-red-800">{error}</p>
+          <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-3 text-sm text-red-800">
+            {error}
           </div>
         )}
 
         {/* Results */}
         {result && (
-          <div className="space-y-6 animate-slide-in-up">
+          <div className="space-y-4">
             {/* Direct Routes */}
             {result.hasDirectRoute && (
               <div>
-                <div className="mb-4 flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600" />
-                  <h2 className="font-display text-xl font-bold">
-                    Direct Bus Found
-                  </h2>
+                <div className="mb-3 flex items-center gap-2 text-sm text-green-700 bg-green-50 px-3 py-2 rounded-lg">
+                  <CheckCircle2 className="h-4 w-4" />
+                  <span className="font-medium">Direct routes available</span>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {result.directRoutes.map((route, index) => (
                     <div
                       key={index}
-                      className="rounded-xl2 border border-line bg-white p-6 hover:border-transit transition-all"
+                      className="bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-md transition-all cursor-pointer"
                     >
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <Bus className="h-5 w-5 text-transit" />
-                            <h3 className="font-display font-bold">
-                              {route.routeId}
-                            </h3>
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
+                            <Bus className="h-5 w-5 text-blue-600" />
                           </div>
-                          <p className="text-sm text-ink/60">{route.routeName}</p>
+                          <div>
+                            <h3 className="font-semibold text-gray-900">{route.routeId}</h3>
+                            <p className="text-sm text-gray-500">{route.routeName}</p>
+                          </div>
                         </div>
                         {route.verified && (
-                          <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
-                            ✓ Verified by {route.verifiedBy}
+                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                            ✓ Verified
                           </span>
                         )}
                       </div>
 
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-transit/10">
-                            <MapPin className="h-4 w-4 text-transit" />
-                          </div>
-                          <div>
-                            <p className="text-xs text-ink/40">Board at</p>
-                            <p className="font-medium">{route.boardAt}</p>
-                          </div>
+                      <div className="mt-3 flex items-center gap-4 text-sm">
+                        <div className="flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+                          <span className="text-gray-600">{route.boardAt}</span>
                         </div>
-
-                        <div className="ml-4 border-l-2 border-dashed border-line pl-4 py-2">
-                          <p className="text-sm text-ink/60">
-                            {route.stopsInBetween} {route.stopsInBetween === 1 ? "stop" : "stops"} in between
-                          </p>
+                        <ArrowRight className="h-4 w-4 text-gray-400" />
+                        <div className="flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-red-500"></div>
+                          <span className="text-gray-600">{route.dropAt}</span>
                         </div>
-
-                        <div className="flex items-center gap-3">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-signal/10">
-                            <MapPin className="h-4 w-4 text-signal" />
-                          </div>
-                          <div>
-                            <p className="text-xs text-ink/40">Drop at</p>
-                            <p className="font-medium">{route.dropAt}</p>
-                          </div>
-                        </div>
+                        <span className="text-gray-400 text-xs ml-auto">
+                          {route.stopsInBetween} {route.stopsInBetween === 1 ? 'stop' : 'stops'}
+                        </span>
                       </div>
 
-                      {/* Journey Stops */}
-                      <details className="mt-4">
-                        <summary className="cursor-pointer text-sm text-transit hover:underline">
-                          View all stops
+                      <details className="mt-2">
+                        <summary className="text-xs text-blue-600 cursor-pointer hover:underline">
+                          View stops
                         </summary>
-                        <div className="mt-3 flex flex-wrap gap-2">
+                        <div className="mt-2 flex flex-wrap gap-1">
                           {route.journeyStops.map((stop, i) => (
                             <span
                               key={i}
-                              className="rounded-full bg-gray-100 px-3 py-1 text-xs"
+                              className="text-xs bg-gray-100 px-2 py-1 rounded"
                             >
                               {stop}
                             </span>
@@ -275,66 +245,56 @@ function SearchBusContent() {
             {/* One-Change Routes */}
             {result.requiresChange && (
               <div>
-                <div className="mb-4 flex items-center gap-2">
-                  <RefreshCw className="h-5 w-5 text-orange-600" />
-                  <h2 className="font-display text-xl font-bold">
-                    1 Change Required
-                  </h2>
+                <div className="mb-3 flex items-center gap-2 text-sm text-orange-700 bg-orange-50 px-3 py-2 rounded-lg">
+                  <RefreshCw className="h-4 w-4" />
+                  <span className="font-medium">1 transfer required</span>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {result.oneChangeRoutes.map((route, index) => (
                     <div
                       key={index}
-                      className="rounded-xl2 border border-line bg-white p-6"
+                      className="bg-white border border-gray-200 rounded-lg p-4 hover:border-orange-400 hover:shadow-md transition-all"
                     >
                       {/* Bus 1 */}
-                      <div className="mb-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Bus className="h-5 w-5 text-transit" />
-                          <h3 className="font-display font-bold">
-                            Bus 1: {route.route1.routeId}
-                          </h3>
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                          <Bus className="h-4 w-4 text-blue-600" />
                         </div>
-                        <p className="text-sm text-ink/60 mb-3">{route.route1.routeName}</p>
-                        <div className="flex items-center gap-4 text-sm">
-                          <div>
-                            <p className="text-ink/40">Board</p>
-                            <p className="font-medium">{route.boardAt}</p>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium text-gray-900">{route.route1.routeId}</span>
+                            <span className="text-xs text-gray-500">{route.route1.routeName}</span>
                           </div>
-                          <ArrowRight className="h-4 w-4 text-ink/40" />
-                          <div>
-                            <p className="text-ink/40">Drop</p>
-                            <p className="font-medium">{route.changeAt}</p>
+                          <div className="flex items-center gap-2 text-xs text-gray-600 mt-1">
+                            <span>{route.boardAt}</span>
+                            <ArrowRight className="h-3 w-3" />
+                            <span>{route.changeAt}</span>
                           </div>
                         </div>
                       </div>
 
                       {/* Change Point */}
-                      <div className="my-4 rounded-lg bg-orange-50 border border-orange-200 p-3">
-                        <p className="text-sm font-medium text-orange-800">
-                          Change at: {route.changeAt}
-                        </p>
+                      <div className="flex items-center gap-2 my-2 px-2">
+                        <div className="h-px flex-1 bg-gray-200"></div>
+                        <span className="text-xs text-orange-600 font-medium">Change at {route.changeAt}</span>
+                        <div className="h-px flex-1 bg-gray-200"></div>
                       </div>
 
                       {/* Bus 2 */}
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <Bus className="h-5 w-5 text-transit" />
-                          <h3 className="font-display font-bold">
-                            Bus 2: {route.route2.routeId}
-                          </h3>
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
+                          <Bus className="h-4 w-4 text-blue-600" />
                         </div>
-                        <p className="text-sm text-ink/60 mb-3">{route.route2.routeName}</p>
-                        <div className="flex items-center gap-4 text-sm">
-                          <div>
-                            <p className="text-ink/40">Board</p>
-                            <p className="font-medium">{route.changeAt}</p>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium text-gray-900">{route.route2.routeId}</span>
+                            <span className="text-xs text-gray-500">{route.route2.routeName}</span>
                           </div>
-                          <ArrowRight className="h-4 w-4 text-ink/40" />
-                          <div>
-                            <p className="text-ink/40">Drop</p>
-                            <p className="font-medium">{route.dropAt}</p>
+                          <div className="flex items-center gap-2 text-xs text-gray-600 mt-1">
+                            <span>{route.changeAt}</span>
+                            <ArrowRight className="h-3 w-3" />
+                            <span>{route.dropAt}</span>
                           </div>
                         </div>
                       </div>
@@ -346,16 +306,11 @@ function SearchBusContent() {
 
             {/* No Routes Found */}
             {!result.hasDirectRoute && !result.requiresChange && (
-              <div className="rounded-xl2 border border-line bg-white p-8 text-center">
-                <Bus className="h-12 w-12 text-ink/20 mx-auto mb-4" />
-                <h3 className="font-display text-lg font-bold mb-2">
-                  No Routes Found
-                </h3>
-                <p className="text-ink/60">
-                  We couldn&apos;t find any buses from {result.from} to {result.to}.
-                </p>
-                <p className="text-sm text-ink/40 mt-2">
-                  Try searching for nearby stops or help us add this route!
+              <div className="bg-white border border-gray-200 rounded-lg p-6 text-center">
+                <Bus className="h-10 w-10 text-gray-300 mx-auto mb-3" />
+                <h3 className="font-semibold text-gray-900 mb-1">No routes found</h3>
+                <p className="text-sm text-gray-500">
+                  No buses available from {result.from} to {result.to}
                 </p>
               </div>
             )}

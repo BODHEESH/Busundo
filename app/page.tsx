@@ -1,60 +1,15 @@
 "use client"
 
 import Link from "next/link"
-import { Bus, Search, MapPin, Users, MessageSquare, UserCircle, ArrowRight, CheckCircle, Smartphone, Clock, Shield, Zap, Star, TrendingUp, Award, Target, Heart, ChevronDown } from "lucide-react"
+import { Bus, Search, MapPin, Users, MessageSquare, UserCircle, ArrowRight, CheckCircle, Smartphone, Clock, Shield, Zap, Star, TrendingUp, Award, Target, Heart } from "lucide-react"
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import ProfessionalNav from "@/components/shared/ProfessionalNav"
 
 export default function Home() {
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
     <main className="min-h-screen bg-white">
       {/* Navigation Bar */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-lg' 
-          : 'bg-white/80 backdrop-blur-sm border-b border-transparent'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 shadow-lg">
-                <Bus className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">BusUndo.com</span>
-            </Link>
-            <div className="flex items-center gap-6">
-              <Link href="/search-bus" className="hidden md:block text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
-                Search
-              </Link>
-              <Link href="/pools" className="hidden md:block text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
-                Ride Pooling
-              </Link>
-              <Link href="/communities" className="hidden md:block text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
-                Communities
-              </Link>
-              <Link href="/circles" className="hidden md:block text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
-                Circles
-              </Link>
-              <Link
-                href="/search-bus"
-                className="rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-2.5 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
-              >
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <ProfessionalNav currentPage="home" />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 pt-32 pb-20">
@@ -72,17 +27,17 @@ export default function Home() {
                   #1 Bus Travel Platform in Kerala
                 </span>
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
                 Real-Time Bus
                 <br />
                 <span className="text-yellow-300 animate-pulse">Tracking Made</span>
                 <br />
                 Simple
               </h1>
-              <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-xl leading-relaxed">
+              <p className="text-lg sm:text-xl md:text-2xl text-blue-100 mb-8 max-w-xl leading-relaxed">
                 Find travel companions, coordinate with friends, and never travel alone again. The community-powered bus travel platform for Kerala.
               </p>
-              <div className="flex items-center gap-6 mb-8">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-8">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-green-400" />
                   <span className="text-sm">Free to use</span>
@@ -99,13 +54,13 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/search-bus"
-                  className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-blue-700 shadow-xl hover:shadow-2xl transition-all hover:scale-105 hover:-translate-y-1"
+                  className="group inline-flex items-center gap-2 rounded-full bg-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-blue-700 shadow-xl hover:shadow-2xl transition-all hover:scale-105 hover:-translate-y-1"
                 >
                   <Search className="h-5 w-5 group-hover:rotate-12 transition-transform" />
                   Search Routes
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <button className="group inline-flex items-center gap-2 rounded-full border-2 border-white px-8 py-4 text-lg font-semibold text-white hover:bg-white/10 transition-all hover:scale-105">
+                <button className="group inline-flex items-center gap-2 rounded-full border-2 border-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white hover:bg-white/10 transition-all hover:scale-105">
                   <Smartphone className="h-5 w-5 group-hover:rotate-12 transition-transform" />
                   Download App
                 </button>
@@ -114,15 +69,27 @@ export default function Home() {
                 Join 10,000+ students already using BusUndo
               </p>
             </div>
-            <div className="relative animate-fade-in-up animation-delay-200">
-              <div className="relative mx-auto w-64 h-[500px] bg-gradient-to-br from-blue-500 to-blue-600 rounded-[3rem] shadow-2xl p-3 transform hover:scale-105 transition-transform duration-500">
+            <div className="relative animate-fade-in-up animation-delay-200 lg:pl-56 flex justify-center lg:justify-start">
+              <div className="relative w-64 sm:w-72 h-[520px] sm:h-[580px] bg-gradient-to-br from-blue-500 to-blue-600 rounded-[3rem] shadow-2xl p-3 transform hover:scale-105 transition-transform duration-500">
                 <div className="w-full h-full bg-white rounded-[2.5rem] flex items-center justify-center overflow-hidden">
-                  <div className="text-center p-8">
-                    <div className="relative">
+                  <div className="text-center p-6 sm:p-8">
+                    <div className="relative mb-4">
                       <div className="absolute inset-0 bg-blue-600 rounded-full blur-2xl opacity-20 animate-pulse"></div>
-                      <Bus className="relative h-16 w-16 text-blue-600 mx-auto mb-4 animate-bounce" />
+                      {/* <Image 
+                        src="/logo/Busundo-Icon.png" 
+                        alt="Busundo" 
+                        width={64} 
+                        height={64}
+                        className="relative mx-auto animate-bounce rounded-lg"
+                      /> */}
                     </div>
-                    <p className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">BusUndo.com</p>
+                <Image 
+                      src="/logo/Busundo-horizontal.png" 
+                      alt="Busundo" 
+                      width={200} 
+                      height={50}
+                      className="mx-auto mb-2"
+                    />
                     <p className="text-sm text-gray-500 mt-2">Live Tracking</p>
                     <div className="mt-6 space-y-2">
                       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -134,12 +101,12 @@ export default function Home() {
                 </div>
               </div>
               {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-3 animate-float">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-xs font-semibold text-gray-700">Live</span>
+                <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-3 animate-float">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-semibold text-gray-700">Live</span>
+                  </div>
                 </div>
-              </div>
               <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-3 animate-float animation-delay-1000">
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-blue-600" />
@@ -299,6 +266,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Banner Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+            <Image 
+              src="/logo/Busundo banner.png" 
+              alt="Busundo - Travel Together. Travel Smart." 
+              width={1200} 
+              height={400}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-4">
+            *Remember, ours is <span className="font-bold text-blue-600">BusUndo.com</span>
+          </p>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -327,11 +313,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-blue-700">
-                  <Bus className="h-5 w-5 text-white" />
-                </div>
-                <span className="text-xl font-bold text-white">BusUndo</span>
+              <div className="mb-4">
+                <Image 
+                  src="/logo/Busundo-horizontal.png" 
+                  alt="Busundo" 
+                  width={150} 
+                  height={40}
+                  className="brightness-0 invert"
+                />
               </div>
               <p className="text-sm text-gray-400">
                 Making bus travel smarter, safer, and more social for Kerala students.

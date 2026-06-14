@@ -1,0 +1,84 @@
+{
+  "name": "BusUndo - Travel Together. Travel Smart.",
+  "short_name": "BusUndo",
+  "description": "The community-powered bus travel platform for Kerala. Find travel companions, track buses in real-time, and never travel alone again.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2563eb",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/logo/Busundo-Icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo/Busundo-Icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["travel", "transportation", "social"],
+  "shortcuts": [
+    {
+      "name": "Search Routes",
+      "short_name": "Search",
+      "description": "Find bus routes and schedules",
+      "url": "/search-bus",
+      "icons": [
+        {
+          "src": "/logo/Busundo-Icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "My Busundo",
+      "short_name": "Profile",
+      "description": "View your scores, streaks, and wrapped",
+      "url": "/my-busundo",
+      "icons": [
+        {
+          "src": "/logo/Busundo-Icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Crowd Meter",
+      "short_name": "Crowd",
+      "description": "Check live bus crowd levels",
+      "url": "/crowd-meter",
+      "icons": [
+        {
+          "src": "/logo/Busundo-Icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Lost & Found",
+      "short_name": "Lost Items",
+      "description": "Report or find lost items",
+      "url": "/lost-found",
+      "icons": [
+        {
+          "src": "/logo/Busundo-Icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/logo/Busundo-image.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
