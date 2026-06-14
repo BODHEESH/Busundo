@@ -48,43 +48,48 @@ export default function ProfessionalNav({ currentPage }: ProfessionalNavProps) {
               className="hidden md:block"
             />
           </Link>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 lg:gap-6">
             <Link 
               href="/search-bus" 
-              className={`hidden md:block text-sm font-medium transition-colors ${
-                currentPage === 'search' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+              prefetch={true}
+              className={`hidden lg:block text-xs lg:text-sm font-medium transition-colors ${
+                currentPage === 'search' ? 'text-yellow-300' : 'text-white hover:text-yellow-300'
               }`}
             >
               Search
             </Link>
             <Link 
               href="/pools" 
-              className={`hidden md:block text-sm font-medium transition-colors ${
-                currentPage === 'pools' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+              prefetch={true}
+              className={`hidden lg:block text-xs lg:text-sm font-medium transition-colors ${
+                currentPage === 'pools' ? 'text-yellow-300' : 'text-white hover:text-yellow-300'
               }`}
             >
               Ride Pooling
             </Link>
             <Link 
               href="/communities" 
-              className={`hidden md:block text-sm font-medium transition-colors ${
-                currentPage === 'communities' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+              prefetch={true}
+              className={`hidden lg:block text-xs lg:text-sm font-medium transition-colors ${
+                currentPage === 'communities' ? 'text-yellow-300' : 'text-white hover:text-yellow-300'
               }`}
             >
               Communities
             </Link>
             <Link 
               href="/circles" 
-              className={`hidden md:block text-sm font-medium transition-colors ${
-                currentPage === 'circles' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+              prefetch={true}
+              className={`hidden lg:block text-xs lg:text-sm font-medium transition-colors ${
+                currentPage === 'circles' ? 'text-yellow-300' : 'text-white hover:text-yellow-300'
               }`}
             >
               Circles
             </Link>
             <Link 
               href="/contribute" 
-              className={`hidden md:block text-sm font-medium transition-colors ${
-                currentPage === 'contribute' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+              prefetch={true}
+              className={`hidden lg:block text-xs lg:text-sm font-medium transition-colors ${
+                currentPage === 'contribute' ? 'text-yellow-300' : 'text-white hover:text-yellow-300'
               }`}
             >
               Contribute
@@ -92,11 +97,11 @@ export default function ProfessionalNav({ currentPage }: ProfessionalNavProps) {
             
             {/* Features Dropdown */}
             <div 
-              className="hidden md:block relative"
+              className="hidden lg:block relative"
               onMouseEnter={() => setShowFeaturesDropdown(true)}
               onMouseLeave={() => setShowFeaturesDropdown(false)}
             >
-              <button className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              <button className="flex items-center gap-1 text-xs lg:text-sm font-medium text-white hover:text-yellow-300 transition-colors">
                 Features
                 <ChevronDown className="h-4 w-4" />
               </button>
@@ -148,22 +153,22 @@ export default function ProfessionalNav({ currentPage }: ProfessionalNavProps) {
             </div>
             <Link
               href="/search-bus"
-              className="hidden md:inline-flex rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-blue-700 shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              className="hidden lg:inline-flex rounded-full bg-white px-4 lg:px-6 py-2 lg:py-2.5 text-xs lg:text-sm font-semibold text-blue-700 shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
               Get Started
             </Link>
             <Link
               href="/admin"
-              className="hidden md:flex items-center gap-2 rounded-lg border-2 border-white px-3 py-2 text-sm font-medium text-white hover:bg-white/10 transition-all"
+              className="hidden lg:flex items-center gap-2 rounded-lg border-2 border-white px-2 lg:px-3 py-1.5 lg:py-2 text-xs lg:text-sm font-medium text-white hover:bg-white/10 transition-all"
               title="Admin Dashboard"
             >
-              <Settings className="h-4 w-4" />
+              <Settings className="h-3 lg:h-4 w-3 lg:w-4" />
             </Link>
             
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+              className="lg:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -178,7 +183,7 @@ export default function ProfessionalNav({ currentPage }: ProfessionalNavProps) {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-gradient-to-r from-blue-700 to-blue-800 border-t border-blue-600">
+        <div className="lg:hidden bg-gradient-to-r from-blue-700 to-blue-800 border-t border-blue-600">
           <div className="px-4 py-4 space-y-3">
             <Link
               href="/search-bus"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Sora, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import InstallPrompt from "@/components/shared/InstallPrompt";
+import NavigationLoader from "@/components/shared/NavigationLoader";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -77,6 +78,7 @@ export default function RootLayout({
       <body
         className={`${sora.variable} ${inter.variable} ${plexMono.variable} font-body bg-paper text-ink antialiased`}
       >
+        <NavigationLoader />
         {children}
         <InstallPrompt />
       </body>

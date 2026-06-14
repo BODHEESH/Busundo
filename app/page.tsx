@@ -19,7 +19,7 @@ export default function Home() {
         <div className="absolute top-40 right-10 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
         <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="text-white animate-fade-in-up">
               <div className="inline-block mb-4">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-sm font-semibold">
@@ -27,41 +27,41 @@ export default function Home() {
                   #1 Bus Travel Platform in Kerala
                 </span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-4 md:mb-6">
                 Real-Time Bus
                 <br />
                 <span className="text-yellow-300 animate-pulse">Tracking Made</span>
                 <br />
                 Simple
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-blue-100 mb-8 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-blue-100 mb-6 md:mb-8 max-w-xl leading-relaxed">
                 Find travel companions, coordinate with friends, and never travel alone again. The community-powered bus travel platform for Kerala.
               </p>
-              <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-8">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 mb-6 md:mb-8">
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-400" />
-                  <span className="text-sm">Free to use</span>
+                  <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-green-400 flex-shrink-0" />
+                  <span className="text-xs md:text-sm">Free to use</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-400" />
-                  <span className="text-sm">Community verified</span>
+                  <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-green-400 flex-shrink-0" />
+                  <span className="text-xs md:text-sm">Community verified</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-400" />
-                  <span className="text-sm">Real-time updates</span>
+                  <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-green-400 flex-shrink-0" />
+                  <span className="text-xs md:text-sm">Real-time updates</span>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3 md:gap-4">
                 <Link
                   href="/search-bus"
-                  className="group inline-flex items-center gap-2 rounded-full bg-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-blue-700 shadow-xl hover:shadow-2xl transition-all hover:scale-105 hover:-translate-y-1"
+                  className="group inline-flex items-center gap-2 rounded-full bg-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg font-semibold text-blue-700 shadow-xl hover:shadow-2xl transition-all hover:scale-105 hover:-translate-y-1"
                 >
-                  <Search className="h-5 w-5 group-hover:rotate-12 transition-transform" />
+                  <Search className="h-4 w-4 md:h-5 md:w-5 group-hover:rotate-12 transition-transform" />
                   Search Routes
-                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <button className="group inline-flex items-center gap-2 rounded-full border-2 border-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white hover:bg-white/10 transition-all hover:scale-105">
-                  <Smartphone className="h-5 w-5 group-hover:rotate-12 transition-transform" />
+                <button className="group inline-flex items-center gap-2 rounded-full border-2 border-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg font-semibold text-white hover:bg-white/10 transition-all hover:scale-105">
+                  <Smartphone className="h-4 w-4 md:h-5 md:w-5 group-hover:rotate-12 transition-transform" />
                   Download App
                 </button>
               </div>
@@ -69,8 +69,8 @@ export default function Home() {
                 Join 10,000+ students already using BusUndo
               </p>
             </div>
-            <div className="relative animate-fade-in-up animation-delay-200 lg:pl-56 flex justify-center lg:justify-start">
-              <div className="relative w-64 sm:w-72 h-[520px] sm:h-[580px] bg-gradient-to-br from-blue-500 to-blue-600 rounded-[3rem] shadow-2xl p-3 transform hover:scale-105 transition-transform duration-500">
+            <div className="relative animate-fade-in-up animation-delay-200 flex justify-center md:justify-end mt-8 md:mt-0">
+              <div className="relative w-52 sm:w-56 md:w-60 lg:w-72 h-[460px] sm:h-[480px] md:h-[500px] lg:h-[580px] bg-gradient-to-br from-blue-500 to-blue-600 rounded-[3rem] shadow-2xl p-3 transform hover:scale-105 transition-transform duration-500">
                 <div className="w-full h-full bg-white rounded-[2.5rem] flex items-center justify-center overflow-hidden">
                   <div className="text-center p-6 sm:p-8">
                     <div className="relative mb-4">
@@ -212,9 +212,9 @@ export default function Home() {
       {/* Experience Section */}
       <section className="py-20 bg-gradient-to-br from-gray-800 to-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative">
-              <div className="relative mx-auto w-64 h-[500px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-[3rem] shadow-2xl p-3">
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="relative order-2 md:order-1">
+              <div className="relative mx-auto w-52 sm:w-56 md:w-60 lg:w-64 h-[450px] sm:h-[480px] md:h-[500px] bg-gradient-to-br from-gray-700 to-gray-800 rounded-[3rem] shadow-2xl p-3">
                 <div className="w-full h-full bg-white rounded-[2.5rem] flex items-center justify-center">
                   <div className="text-center p-8">
                     <MapPin className="h-16 w-16 text-blue-600 mx-auto mb-4" />
@@ -224,7 +224,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div>
+            <div className="order-1 md:order-2">
               <p className="text-blue-400 font-semibold mb-4">FEATURES</p>
               <h2 className="text-4xl font-bold mb-8">
                 Experience Evide <span className="text-blue-400">in Action</span>
