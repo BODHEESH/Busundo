@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Bus, Search, Users, MessageSquare, UserCircle, Settings, ChevronDown, Flame, Package, Heart, TrendingUp, Menu, X } from "lucide-react"
+import { Bus, Search, Users, MessageSquare, UserCircle, Settings, ChevronDown, Flame, Package, Heart, TrendingUp, Menu, X, Compass } from "lucide-react"
 import { useState, useEffect } from "react"
 
 interface ProfessionalNavProps {
@@ -57,6 +57,15 @@ export default function ProfessionalNav({ currentPage }: ProfessionalNavProps) {
               }`}
             >
               Search
+            </Link>
+            <Link 
+              href="/explore" 
+              prefetch={true}
+              className={`hidden lg:block text-xs lg:text-sm font-medium transition-colors ${
+                currentPage === 'explore' ? 'text-yellow-300' : 'text-white hover:text-yellow-300'
+              }`}
+            >
+              Explore
             </Link>
             <Link 
               href="/pools" 
@@ -195,6 +204,19 @@ export default function ProfessionalNav({ currentPage }: ProfessionalNavProps) {
               <div className="flex items-center gap-3">
                 <Search className="h-5 w-5" />
                 <span className="font-medium">Search</span>
+              </div>
+            </Link>
+            
+            <Link
+              href="/explore"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`block px-4 py-3 rounded-lg transition-colors ${
+                currentPage === 'explore' ? 'bg-white/20 text-yellow-300' : 'text-white hover:bg-white/10'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Compass className="h-5 w-5" />
+                <span className="font-medium">Explore</span>
               </div>
             </Link>
             
