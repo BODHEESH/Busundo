@@ -17,7 +17,9 @@
     "scrape:all": "npm run scrape:ksrtc && npm run import:ksrtc"
   },
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "axios": "^1.6.0",
+    "bcryptjs": "^3.0.3",
     "cheerio": "^1.0.0-rc.12",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -33,6 +35,7 @@
     "react-leaflet": "^4.2.1",
     "socket.io": "^4.7.0",
     "socket.io-client": "^4.7.0",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.0",

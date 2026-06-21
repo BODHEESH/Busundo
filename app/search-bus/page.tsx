@@ -15,6 +15,7 @@ interface DirectRoute {
   journeyStops: string[];
   verified: boolean;
   verifiedBy: number;
+  isReturn?: boolean;
 }
 
 interface OneChangeRoute {
@@ -199,11 +200,18 @@ function SearchBusContent() {
                             <p className="text-sm text-gray-500">{route.routeName}</p>
                           </div>
                         </div>
-                        {route.verified && (
-                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
-                            ✓ Verified
-                          </span>
-                        )}
+                        <div className="flex items-center gap-1.5">
+                          {route.isReturn && (
+                            <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-medium">
+                              ↩ Return
+                            </span>
+                          )}
+                          {route.verified && (
+                            <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                              ✓ Verified
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       <div className="mt-3 flex items-center gap-4 text-sm">

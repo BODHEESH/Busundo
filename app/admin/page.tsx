@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bus, MapPin, Users, BarChart3, MessageSquare } from "lucide-react";
+import { Bus, MapPin, Users, BarChart3, MessageSquare, Shield } from "lucide-react";
 import PageWrapper from "@/components/shared/PageWrapper";
 
 export default function AdminDashboard() {
@@ -76,6 +76,19 @@ export default function AdminDashboard() {
             <h3 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Suggestions</h3>
             <p className="text-sm text-gray-600">
               Review community suggestions
+            </p>
+          </Link>
+
+          <Link
+            href="/admin/users"
+            className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-lg transition-all hover:border-purple-500"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-50 mb-4">
+              <Shield className="h-6 w-6 text-purple-600" />
+            </div>
+            <h3 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">Users</h3>
+            <p className="text-sm text-gray-600">
+              Manage users, roles &amp; permissions
             </p>
           </Link>
         </div>

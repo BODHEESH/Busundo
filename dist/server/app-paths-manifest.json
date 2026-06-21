@@ -2,6 +2,10 @@
   "/page": "app/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/explore/page": "app/explore/page.js",
-  "/explore/[slug]/page": "app/explore/[slug]/page.js",
-  "/explore/add-place/page": "app/explore/add-place/page.js"
+  "/explore/add-place/page": "app/explore/add-place/page.js",
+  "/admin/routes/add/page": "app/admin/routes/add/page.js",
+  "/admin/stops/add/page": "app/admin/stops/add/page.js",
+  "/admin/suggestions/page": "app/admin/suggestions/page.js",
+  "/admin/stops/page": "app/admin/stops/page.js",
+  "/admin/page": "app/admin/page.js"
 }

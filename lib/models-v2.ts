@@ -44,7 +44,7 @@ export interface Route {
 
 export async function getRoutesCollectionV2() {
   const db = await getDatabase();
-  return db.collection<Route>("routesV2");
+  return db.collection<Route>("routes");
 }
 
 // ============================================
@@ -212,37 +212,41 @@ export async function bulkCreateRoute(
 
 export async function findDirectRoutes(fromStop: string, toStop: string) {
   const routes = await getRoutesCollectionV2();
-  
-  // Find routes that contain both stops
-  const matchingRoutes = await routes.find({
-    stops: { $all: [fromStop, toStop] }
-  }).toArray();
-  
-  // Filter routes where fromStop comes before toStop
-  const validRoutes = matchingRoutes.filter(route => {
-    const fromIndex = route.stops.findIndex(s => 
-      s.toLowerCase() === fromStop.toLowerCase()
+  const fromLower = fromStop.toLowerCase();
+  const toLower = toStop.toLowerCase();
+
+  // Fetch all routes and do partial case-insensitive matching
+  const allRoutes = await routes.find({}).toArray();
+
+  const validRoutes = allRoutes.filter((route) => {
+    const fromIndex = route.stops.findIndex((s: string) =>
+      s.toLowerCase().includes(fromLower)
     );
-    const toIndex = route.stops.findIndex(s => 
-      s.toLowerCase() === toStop.toLowerCase()
+    const toIndex = route.stops.findIndex((s: string) =>
+      s.toLowerCase().includes(toLower)
     );
-    return fromIndex !== -1 && toIndex !== -1 && fromIndex < toIndex;
+    return fromIndex !== -1 && toIndex !== -1 && fromIndex !== toIndex;
   });
-  
-  return validRoutes.map(route => {
-    const fromIndex = route.stops.findIndex(s => 
-      s.toLowerCase() === fromStop.toLowerCase()
+
+  return validRoutes.map((route) => {
+    const fromIndex = route.stops.findIndex((s: string) =>
+      s.toLowerCase().includes(fromLower)
     );
-    const toIndex = route.stops.findIndex(s => 
-      s.toLowerCase() === toStop.toLowerCase()
+    const toIndex = route.stops.findIndex((s: string) =>
+      s.toLowerCase().includes(toLower)
     );
-    
+
+    const isReturn = fromIndex > toIndex;
+    const startIdx = Math.min(fromIndex, toIndex);
+    const endIdx = Math.max(fromIndex, toIndex);
+
     return {
       route,
       boardAt: route.stops[fromIndex],
       dropAt: route.stops[toIndex],
-      stopsInBetween: toIndex - fromIndex - 1,
-      journeyStops: route.stops.slice(fromIndex, toIndex + 1),
+      stopsInBetween: endIdx - startIdx - 1,
+      journeyStops: route.stops.slice(startIdx, endIdx + 1),
+      isReturn,
     };
   });
 }
@@ -250,7 +254,9 @@ export async function findDirectRoutes(fromStop: string, toStop: string) {
 export async function findOneChangeRoutes(fromStop: string, toStop: string) {
   const routes = await getRoutesCollectionV2();
   const allRoutes = await routes.find({}).toArray();
-  
+  const fromLower = fromStop.toLowerCase();
+  const toLower = toStop.toLowerCase();
+
   const oneChangeOptions: Array<{
     route1: Route;
     route2: Route;
@@ -258,43 +264,43 @@ export async function findOneChangeRoutes(fromStop: string, toStop: string) {
     boardAt: string;
     dropAt: string;
   }> = [];
-  
-  // Find routes from source
-  const fromRoutes = allRoutes.filter(route => 
-    route.stops.some(s => s.toLowerCase() === fromStop.toLowerCase())
+
+  // Find routes from source (partial match)
+  const fromRoutes = allRoutes.filter((route) =>
+    route.stops.some((s: string) => s.toLowerCase().includes(fromLower))
   );
-  
-  // Find routes to destination
-  const toRoutes = allRoutes.filter(route => 
-    route.stops.some(s => s.toLowerCase() === toStop.toLowerCase())
+
+  // Find routes to destination (partial match)
+  const toRoutes = allRoutes.filter((route) =>
+    route.stops.some((s: string) => s.toLowerCase().includes(toLower))
   );
-  
+
   // Find common stops (interchange points)
   for (const route1 of fromRoutes) {
-    const fromIndex = route1.stops.findIndex(s => 
-      s.toLowerCase() === fromStop.toLowerCase()
+    const fromIndex = route1.stops.findIndex((s: string) =>
+      s.toLowerCase().includes(fromLower)
     );
-    
+
     // Get all stops after source in route1
     const stopsAfterSource = route1.stops.slice(fromIndex + 1);
-    
+
     for (const route2 of toRoutes) {
-      const toIndex = route2.stops.findIndex(s => 
-        s.toLowerCase() === toStop.toLowerCase()
+      const toIndex = route2.stops.findIndex((s: string) =>
+        s.toLowerCase().includes(toLower)
       );
-      
+
       // Get all stops before destination in route2
       const stopsBeforeDestination = route2.stops.slice(0, toIndex);
-      
+
       // Find common stops
-      const commonStops = stopsAfterSource.filter(stop =>
-        stopsBeforeDestination.some(s => s.toLowerCase() === stop.toLowerCase())
+      const commonStops = stopsAfterSource.filter((stop: string) =>
+        stopsBeforeDestination.some((s: string) => s.toLowerCase() === stop.toLowerCase())
       );
-      
+
       if (commonStops.length > 0) {
         // Use the first common stop as interchange
         const changeAt = commonStops[0];
-        
+
         oneChangeOptions.push({
           route1,
           route2,
@@ -305,7 +311,7 @@ export async function findOneChangeRoutes(fromStop: string, toStop: string) {
       }
     }
   }
-  
+
   return oneChangeOptions;
 }
 

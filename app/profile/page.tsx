@@ -1,88 +1,181 @@
-import Link from "next/link";
-import { Mail, GraduationCap, Star, ChevronRight, LogOut } from "lucide-react";
-import { TopNav } from "@/components/nav";
-import { StatusBadge } from "@/components/status-badge";
-import { currentUser, mockRoutes, mockHistory } from "@/lib/mock-data";
+"use client"
+
+import { useSession, signOut } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
+import {
+  Mail,
+  Shield,
+  Calendar,
+  LogOut,
+  MapPin,
+  Clock,
+  User as UserIcon,
+} from "lucide-react"
 
 export default function ProfilePage() {
-  const favoriteRoutes = mockRoutes.filter((r) =>
-    currentUser.favoriteRouteIds.includes(r.id)
-  );
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
+  if (status === "loading") {
+    return (
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-pulse space-y-4 text-center">
+          <div className="h-20 w-20 bg-gray-200 rounded-full mx-auto" />
+          <div className="h-6 w-32 bg-gray-200 rounded mx-auto" />
+        </div>
+      </main>
+    )
+  }
+
+  if (status === "unauthenticated") {
+    router.push("/login")
+    return null
+  }
+
+  const user = session?.user as any
+  const initials = user?.name?.charAt(0)?.toUpperCase() || "?"
+  const role = user?.role || "user"
+  const isGoogle = !user?.image?.includes("Busundo-Icon")
+
+  const joinedDate = new Date().toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  })
 
   return (
-    <main className="mx-auto max-w-3xl px-4 pb-16">
-      <TopNav back={{ href: "/dashboard", label: "Dashboard" }} />
-
-      {/* Profile header */}
-      <section className="flex items-center gap-4 py-6">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-transit font-display text-2xl font-bold text-paper">
-          {currentUser.initial}
-        </span>
-        <div>
-          <h1 className="font-display text-xl font-bold tracking-tight">
-            {currentUser.name}
-          </h1>
-          <p className="mt-1 flex items-center gap-1.5 text-xs text-ink/50">
-            <Mail className="h-3.5 w-3.5" /> {currentUser.email}
-          </p>
-          <p className="mt-1 flex items-center gap-1.5 text-xs text-ink/50">
-            <GraduationCap className="h-3.5 w-3.5" /> {currentUser.college}
-          </p>
-        </div>
-      </section>
-
-      {/* Favorite routes */}
-      <section className="mt-2">
-        <h2 className="mb-3 font-display text-base font-bold">Favourite routes</h2>
-        <div className="space-y-3">
-          {favoriteRoutes.map((route) => (
-            <Link
-              key={route.id}
-              href={`/routes/${route.id}`}
-              className="flex items-center justify-between rounded-xl2 border border-line bg-white p-4 transition hover:border-transit"
-            >
-              <div className="flex items-center gap-3">
-                <Star className="h-4 w-4 fill-signal text-signal" />
-                <div>
-                  <p className="font-display text-sm font-semibold">
-                    {route.source} → {route.destination}
-                  </p>
-                  <p className="text-xs text-ink/50 tabular">
-                    {route.duration} · {route.stops.length} stops
-                  </p>
-                </div>
-              </div>
-              <ChevronRight className="h-4 w-4 text-ink/30" />
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Travel history */}
-      <section className="mt-8">
-        <h2 className="mb-3 font-display text-base font-bold">Travel history</h2>
-        <div className="overflow-hidden rounded-xl2 border border-line bg-white">
-          {mockHistory.map((entry, i) => (
-            <div
-              key={entry.id}
-              className={`flex items-center justify-between p-4 ${
-                i !== mockHistory.length - 1 ? "border-b border-line" : ""
-              }`}
-            >
-              <div>
-                <p className="text-sm font-medium">{entry.routeLabel}</p>
-                <p className="mt-0.5 text-xs text-ink/40">{entry.date}</p>
-              </div>
-              <StatusBadge status={entry.status} />
+    <main className="min-h-screen bg-gray-50">
+      <div className="max-w-3xl mx-auto px-4 py-8 pb-16">
+        {/* Header */}
+        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+          <div className="flex items-center gap-4">
+            {user?.image ? (
+              <Image
+                src={user.image}
+                alt={user.name || "User"}
+                width={72}
+                height={72}
+                className="rounded-full object-cover border-2 border-gray-100"
+                unoptimized
+              />
+            ) : (
+              <span className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-blue-600 text-white text-2xl font-bold">
+                {initials}
+              </span>
+            )}
+            <div className="flex-1 min-w-0">
+              <h1 className="text-xl font-bold text-gray-900 truncate">
+                {user?.name || "User"}
+              </h1>
+              <p className="flex items-center gap-1.5 text-sm text-gray-500 mt-1">
+                <Mail className="h-4 w-4" />
+                <span className="truncate">{user?.email}</span>
+              </p>
+              <span className="inline-flex mt-2 items-center gap-1 rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 capitalize">
+                <Shield className="h-3 w-3" />
+                {role}
+              </span>
             </div>
-          ))}
+          </div>
         </div>
-      </section>
 
-      <button className="mt-8 flex w-full items-center justify-center gap-2 rounded-lg border border-line py-3 text-sm font-semibold text-ink/60 hover:border-signal hover:text-signal">
-        <LogOut className="h-4 w-4" />
-        Sign out
-      </button>
+        {/* Account Info */}
+        <div className="mt-6 bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+          <h2 className="text-base font-bold text-gray-900 mb-4">
+            Account Details
+          </h2>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <UserIcon className="h-5 w-5 text-gray-400" />
+                <span className="text-sm text-gray-600">Display Name</span>
+              </div>
+              <span className="text-sm font-medium text-gray-900">
+                {user?.name || "—"}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Mail className="h-5 w-5 text-gray-400" />
+                <span className="text-sm text-gray-600">Email</span>
+              </div>
+              <span className="text-sm font-medium text-gray-900">
+                {user?.email || "—"}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Shield className="h-5 w-5 text-gray-400" />
+                <span className="text-sm text-gray-600">Role</span>
+              </div>
+              <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700 capitalize">
+                {role}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-gray-400" />
+                <span className="text-sm text-gray-600">Sign-in Method</span>
+              </div>
+              <span className="text-sm font-medium text-gray-900">
+                {isGoogle ? "Google" : "Email & Password"}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Calendar className="h-5 w-5 text-gray-400" />
+                <span className="text-sm text-gray-600">Member Since</span>
+              </div>
+              <span className="text-sm font-medium text-gray-900">
+                {joinedDate}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Clock className="h-5 w-5 text-gray-400" />
+                <span className="text-sm text-gray-600">User ID</span>
+              </div>
+              <span className="text-xs font-mono text-gray-500 truncate max-w-[180px]">
+                {user?.id}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="mt-6 grid grid-cols-2 gap-4">
+          <button
+            onClick={() => router.push("/")}
+            className="bg-white rounded-xl border border-gray-200 p-4 text-center shadow-sm hover:border-blue-300 transition-colors"
+          >
+            <MapPin className="h-5 w-5 text-blue-600 mx-auto mb-2" />
+            <span className="text-sm font-medium text-gray-700">Explore</span>
+          </button>
+          <button
+            onClick={() => router.push("/search-bus")}
+            className="bg-white rounded-xl border border-gray-200 p-4 text-center shadow-sm hover:border-blue-300 transition-colors"
+          >
+            <Clock className="h-5 w-5 text-green-600 mx-auto mb-2" />
+            <span className="text-sm font-medium text-gray-700">
+              Search Buses
+            </span>
+          </button>
+        </div>
+
+        {/* Sign Out */}
+        <button
+          onClick={() => signOut({ callbackUrl: "/" })}
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 py-3 text-sm font-semibold text-red-600 hover:bg-red-100 transition-colors"
+        >
+          <LogOut className="h-4 w-4" />
+          Sign Out
+        </button>
+      </div>
     </main>
-  );
+  )
 }

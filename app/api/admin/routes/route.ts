@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { bulkCreateRoute, getRoutesCollectionV2 } from "@/lib/models-v2";
+import { getDatabase } from "@/lib/mongodb";
+import { bulkCreateRoute } from "@/lib/models-v2";
 import { ObjectId } from "mongodb";
 
 // Temporary admin user ID (replace with actual auth later)
@@ -41,18 +42,23 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    const routes = await getRoutesCollectionV2();
-    const allRoutes = await routes.find({}).sort({ routeId: 1 }).toArray();
-    
+    const db = await getDatabase();
+    const routesCollection = db.collection("routes");
+    // Only fetch documents with new schema (routeName exists)
+    const allRoutes = await routesCollection
+      .find({ routeName: { $exists: true } })
+      .sort({ createdAt: -1 })
+      .toArray();
+
     return NextResponse.json({
-      routes: allRoutes.map(r => ({
+      routes: allRoutes.map((r) => ({
         _id: r._id?.toString(),
-        routeId: r.routeId,
-        routeName: r.routeName,
-        district: r.district,
-        stopsCount: r.stops.length,
-        verified: r.verified,
-        verifiedBy: r.verifiedBy.length,
+        routeId: r.routeId || r.code || "N/A",
+        routeName: r.routeName || `${r.source || ""}-${r.destination || ""}`,
+        district: r.district || "Unknown",
+        stopsCount: r.stopsCount || (Array.isArray(r.stops) ? r.stops.length : 0),
+        verified: r.verified || false,
+        verifiedBy: Array.isArray(r.verifiedBy) ? r.verifiedBy.length : (r.verifiedBy || 0),
       })),
       total: allRoutes.length,
     });

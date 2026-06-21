@@ -35,6 +35,7 @@ export async function GET(request: Request) {
         journeyStops: r.journeyStops,
         verified: r.route.verified,
         verifiedBy: r.route.verifiedBy.length,
+        isReturn: r.isReturn,
       })),
       oneChangeRoutes: oneChangeRoutes.map(r => ({
         route1: {

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getDatabase } from "@/lib/mongodb";
 import { createBusStop, getBusStopsCollection } from "@/lib/models-v2";
 import { ObjectId } from "mongodb";
 
@@ -44,17 +45,18 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    const stops = await getBusStopsCollection();
-    const allStops = await stops.find({}).sort({ stopName: 1 }).toArray();
-    
+    const db = await getDatabase();
+    const stopsCollection = db.collection("stops");
+    const allStops = await stopsCollection.find({}).sort({ stopName: 1 }).toArray();
+
     return NextResponse.json({
-      stops: allStops.map(s => ({
+      stops: allStops.map((s) => ({
         _id: s._id?.toString(),
         stopName: s.stopName,
-        district: s.district,
-        taluk: s.taluk,
-        verified: s.verified,
-        verifiedBy: s.verifiedBy.length,
+        district: s.district || "Unknown",
+        taluk: s.taluk || "Unknown",
+        verified: s.verified || false,
+        verifiedBy: Array.isArray(s.verifiedBy) ? s.verifiedBy.length : (s.verifiedBy || 0),
       })),
       total: allStops.length,
     });

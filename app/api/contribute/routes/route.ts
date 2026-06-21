@@ -4,9 +4,9 @@ import { getDatabase } from "@/lib/mongodb";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { routeId, routeName, district, stops } = body;
+    const { routeName, district, stops } = body;
 
-    if (!routeId || !routeName || !district || !stops) {
+    if (!routeName || !district || !stops) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -17,14 +17,14 @@ export async function POST(request: NextRequest) {
     const routesCollection = db.collection("routes");
     const stopsCollection = db.collection("stops");
 
-    // Check if route already exists
-    const existingRoute = await routesCollection.findOne({ routeId });
-    if (existingRoute) {
-      return NextResponse.json(
-        { error: "Route ID already exists" },
-        { status: 400 }
-      );
-    }
+    // Auto-generate route ID: DISTRICT-ROUTENAME-XXXX
+    const districtPrefix = district.substring(0, 3).toUpperCase();
+    const nameSlug = routeName
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, "")
+      .substring(0, 6);
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    const routeId = `${districtPrefix}-${nameSlug}-${randomSuffix}`;
 
     // Parse stops
     const stopNames = stops
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Process stops - create missing ones
-    const stopIds: string[] = [];
+    const createdStopNames: string[] = [];
     for (const stopName of stopNames) {
       let stop = await stopsCollection.findOne({ stopName });
 
@@ -54,11 +54,9 @@ export async function POST(request: NextRequest) {
           verifiedBy: 0,
           createdAt: new Date(),
         };
-        const result = await stopsCollection.insertOne(newStop);
-        stopIds.push(result.insertedId.toString());
-      } else {
-        stopIds.push(stop._id.toString());
+        await stopsCollection.insertOne(newStop);
       }
+      createdStopNames.push(stopName);
     }
 
     // Create route with verified: false (pending admin approval)
@@ -66,8 +64,8 @@ export async function POST(request: NextRequest) {
       routeId,
       routeName,
       district,
-      stops: stopIds,
-      stopsCount: stopIds.length,
+      stops: createdStopNames,
+      stopsCount: createdStopNames.length,
       verified: false,
       verifiedBy: 0,
       createdAt: new Date(),

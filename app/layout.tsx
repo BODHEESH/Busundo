@@ -3,6 +3,9 @@ import { Sora, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import InstallPrompt from "@/components/shared/InstallPrompt";
 import NavigationLoader from "@/components/shared/NavigationLoader";
+import AuthProvider from "@/components/providers/AuthProvider";
+import { Toaster } from "sonner";
+import AuthToast from "@/components/shared/AuthToast";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -65,8 +68,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
+    <html lang="en" suppressHydrationWarning>
+      <head suppressHydrationWarning>
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/logo/Busundo-Icon.png" />
         <link rel="apple-touch-icon" href="/logo/Busundo-Icon.png" />
@@ -78,9 +81,13 @@ export default function RootLayout({
       <body
         className={`${sora.variable} ${inter.variable} ${plexMono.variable} font-body bg-paper text-ink antialiased`}
       >
-        <NavigationLoader />
-        {children}
-        <InstallPrompt />
+        <AuthProvider>
+          <Toaster position="top-center" richColors closeButton />
+          <AuthToast />
+          <NavigationLoader />
+          {children}
+          <InstallPrompt />
+        </AuthProvider>
       </body>
     </html>
   );

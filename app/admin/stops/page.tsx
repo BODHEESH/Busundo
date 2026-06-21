@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, MapPin, CheckCircle2, Plus } from "lucide-react";
+import { ArrowLeft, MapPin, CheckCircle2, Plus, ShieldCheck } from "lucide-react";
 
 interface Stop {
   _id: string;
@@ -18,6 +18,7 @@ export default function ViewStopsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filterTaluk, setFilterTaluk] = useState<string>("all");
+  const [processingId, setProcessingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchStops();
@@ -37,6 +38,23 @@ export default function ViewStopsPage() {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleApprove = async (id: string) => {
+    setProcessingId(id);
+    try {
+      const res = await fetch(`/api/admin/stops/${id}/approve`, { method: "POST" });
+      if (res.ok) {
+        fetchStops();
+      } else {
+        const data = await res.json();
+        alert(data.error || "Failed to approve");
+      }
+    } catch (err: any) {
+      alert(err.message);
+    } finally {
+      setProcessingId(null);
     }
   };
 
@@ -106,27 +124,20 @@ export default function ViewStopsPage() {
             </div>
           </div>
 
-          {/* Filter */}
+          {/* Pending count */}
           <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
-            <label htmlFor="taluk-filter" className="block text-sm font-semibold text-gray-700 mb-3">
-              Filter by Taluk
-            </label>
-            <select
-              id="taluk-filter"
-              value={filterTaluk}
-              onChange={(e) => setFilterTaluk(e.target.value)}
-              className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm font-medium focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-            >
-              <option value="all">All Taluks ({stops.length} stops)</option>
-              {taluks.map(taluk => {
-                const count = stops.filter(s => s.taluk === taluk).length;
-                return (
-                  <option key={taluk} value={taluk}>
-                    {taluk} ({count} stops)
-                  </option>
-                );
-              })}
-            </select>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Pending</p>
+                <p className="mt-2 text-5xl font-bold text-orange-600">
+                  {stops.filter(s => !s.verified).length}
+                </p>
+                <p className="mt-2 text-sm text-gray-500">Stops awaiting approval</p>
+              </div>
+              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg shadow-orange-500/30">
+                <ShieldCheck className="h-10 w-10 text-white" />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -178,9 +189,19 @@ export default function ViewStopsPage() {
                             </div>
                           )}
                           {!stop.verified && (
-                            <span className="inline-block mt-2 rounded-full bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-700">
-                              Pending
-                            </span>
+                            <div className="mt-2 flex items-center gap-2">
+                              <span className="rounded-full bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-700">
+                                Pending
+                              </span>
+                              <button
+                                onClick={() => handleApprove(stop._id)}
+                                disabled={processingId === stop._id}
+                                className="flex items-center gap-1 rounded bg-green-100 px-2 py-1 text-xs font-semibold text-green-700 hover:bg-green-200 transition-colors disabled:opacity-50"
+                              >
+                                <CheckCircle2 className="h-3 w-3" />
+                                {processingId === stop._id ? "..." : "Approve"}
+                              </button>
+                            </div>
                           )}
                         </div>
                       </div>

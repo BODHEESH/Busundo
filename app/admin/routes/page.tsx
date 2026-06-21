@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Bus, CheckCircle2, Plus } from "lucide-react";
+import { ArrowLeft, Bus, CheckCircle2, Plus, ShieldCheck } from "lucide-react";
 
 interface Route {
   _id: string;
@@ -18,6 +18,7 @@ export default function ViewRoutesPage() {
   const [routes, setRoutes] = useState<Route[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [processingId, setProcessingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchRoutes();
@@ -37,6 +38,23 @@ export default function ViewRoutesPage() {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleApprove = async (id: string) => {
+    setProcessingId(id);
+    try {
+      const res = await fetch(`/api/admin/routes/${id}/approve`, { method: "POST" });
+      if (res.ok) {
+        fetchRoutes();
+      } else {
+        const data = await res.json();
+        alert(data.error || "Failed to approve");
+      }
+    } catch (err: any) {
+      alert(err.message);
+    } finally {
+      setProcessingId(null);
     }
   };
 
@@ -77,15 +95,31 @@ export default function ViewRoutesPage() {
         </div>
 
         {/* Stats */}
-        <div className="mb-10 rounded-2xl border border-gray-200 bg-white p-8 shadow-lg animate-slide-in-up">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Routes</p>
-              <p className="mt-2 text-5xl font-bold text-gray-900">{routes.length}</p>
-              <p className="mt-2 text-sm text-gray-500">Active bus routes in system</p>
+        <div className="mb-10 grid gap-6 md:grid-cols-2 animate-slide-in-up">
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Routes</p>
+                <p className="mt-2 text-5xl font-bold text-gray-900">{routes.length}</p>
+                <p className="mt-2 text-sm text-gray-500">All bus routes in system</p>
+              </div>
+              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30">
+                <Bus className="h-10 w-10 text-white" />
+              </div>
             </div>
-            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30">
-              <Bus className="h-10 w-10 text-white" />
+          </div>
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Pending</p>
+                <p className="mt-2 text-5xl font-bold text-orange-600">
+                  {routes.filter(r => !r.verified).length}
+                </p>
+                <p className="mt-2 text-sm text-gray-500">Routes awaiting approval</p>
+              </div>
+              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg shadow-orange-500/30">
+                <ShieldCheck className="h-10 w-10 text-white" />
+              </div>
             </div>
           </div>
         </div>
@@ -147,8 +181,24 @@ export default function ViewRoutesPage() {
 
                   <div className="flex items-center gap-2">
                     {!route.verified && (
-                      <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-medium text-orange-700">
-                        Pending Verification
+                      <>
+                        <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-medium text-orange-700">
+                          Pending Verification
+                        </span>
+                        <button
+                          onClick={() => handleApprove(route._id)}
+                          disabled={processingId === route._id}
+                          className="flex items-center gap-1.5 rounded-lg bg-green-100 px-4 py-2 text-sm font-semibold text-green-700 hover:bg-green-200 transition-colors disabled:opacity-50"
+                        >
+                          <CheckCircle2 className="h-4 w-4" />
+                          {processingId === route._id ? "Approving..." : "Approve"}
+                        </button>
+                      </>
+                    )}
+                    {route.verified && (
+                      <span className="flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+                        <CheckCircle2 className="h-3.5 w-3.5" />
+                        Verified
                       </span>
                     )}
                   </div>

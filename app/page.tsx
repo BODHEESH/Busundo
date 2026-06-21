@@ -60,10 +60,10 @@ export default function Home() {
                   Search Routes
                   <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <button className="group inline-flex items-center gap-2 rounded-full border-2 border-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg font-semibold text-white hover:bg-white/10 transition-all hover:scale-105">
+                {/* <button className="group inline-flex items-center gap-2 rounded-full border-2 border-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg font-semibold text-white hover:bg-white/10 transition-all hover:scale-105">
                   <Smartphone className="h-4 w-4 md:h-5 md:w-5 group-hover:rotate-12 transition-transform" />
                   Download App
-                </button>
+                </button> */}
               </div>
               <p className="text-sm text-blue-200 mt-6">
                 Join 10,000+ students already using BusUndo
@@ -314,12 +314,12 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="mb-4">
-                <Image 
-                  src="/logo/Busundo-horizontal.png" 
-                  alt="Busundo" 
-                  width={150} 
-                  height={40}
-                  className="brightness-0 invert"
+                <Image
+                  src="/logo/Busundo-horizontal.png"
+                  alt="Busundo"
+                  width={180}
+                  height={45}
+                  className="brightness-200"
                 />
               </div>
               <p className="text-sm text-gray-400">
@@ -359,7 +359,7 @@ export default function Home() {
           </div>
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-sm text-gray-400">
-            <p>© 2026 BusUndo. All rights reserved. Made with ❤️ for Kerala students.</p>
+            <p>© 2026 BusUndo. All rights reserved. Built by <span className="font-semibold text-white">Bodheesh VC</span>. Made with ❤️ for Kerala.</p>
           </div>
         </div>
       </footer>
