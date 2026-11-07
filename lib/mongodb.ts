@@ -33,7 +33,8 @@ function getClientPromise(): Promise<MongoClient> {
     clientPromise = client.connect();
   }
 
-  return clientPromise;
+  // Both branches above assign clientPromise, so it is always set here
+  return clientPromise as Promise<MongoClient>;
 }
 
 // Export the lazy client promise
