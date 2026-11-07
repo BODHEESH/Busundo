@@ -6,6 +6,7 @@ import { getSession, isAdmin } from "@/lib/auth";
 // Points rules (agreed defaults; adjust in one place)
 const POINTS_PER_ROUTE = 50;
 const POINTS_PER_NEW_STOP = 10;
+const POINTS_PER_TIMING = 15;
 const DAILY_POINTS_CAP = 100;
 
 export async function POST(
@@ -32,6 +33,13 @@ export async function POST(
       return NextResponse.json({ error: "Route not found" }, { status: 404 });
     }
 
+    if (route.status === "rejected") {
+      return NextResponse.json(
+        { error: "A rejected route cannot be approved" },
+        { status: 409 }
+      );
+    }
+
     // Idempotent: approving twice never awards points twice
     if (route.verified === true) {
       return NextResponse.json({
@@ -46,7 +54,11 @@ export async function POST(
     const hasRealSubmitter = !!submitterId && /^[a-f0-9]{24}$/.test(submitterId);
 
     if (hasRealSubmitter) {
-      const raw = POINTS_PER_ROUTE + POINTS_PER_NEW_STOP * (route.newStopCount || 0);
+      const timingCount = Array.isArray(route.timings) ? route.timings.length : 0;
+      const raw =
+        POINTS_PER_ROUTE +
+        POINTS_PER_NEW_STOP * (route.newStopCount || 0) +
+        POINTS_PER_TIMING * timingCount;
 
       // Daily cap per contributor, counted from today's karma transactions
       const startOfDay = new Date();

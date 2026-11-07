@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDatabase } from "@/lib/mongodb";
 import { getSession } from "@/lib/auth";
+import { parseTimingLines } from "@/lib/timings";
 
 // Max route submissions per user per 24 hours (anti-spam)
 const DAILY_SUBMISSION_LIMIT = 20;
@@ -31,7 +32,16 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { routeName, district, stops } = body;
+    const { routeName, district, stops, timingsText } = body;
+
+    // Optional departure times, one per line (e.g. "08:30 daily")
+    const timingParse = parseTimingLines(typeof timingsText === "string" ? timingsText : "");
+    if (timingParse.errors.length) {
+      return NextResponse.json(
+        { error: timingParse.errors[0], errors: timingParse.errors },
+        { status: 400 }
+      );
+    }
 
     if (!routeName || !district || !stops) {
       return NextResponse.json(
@@ -101,6 +111,7 @@ export async function POST(request: NextRequest) {
       submittedBy: submitterId,
       status: "pending", // public only after admin approval
       newStopCount,
+      timings: timingParse.timings,
       pointsAwarded: false,
     };
 
