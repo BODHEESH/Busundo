@@ -2,7 +2,7 @@ import { MongoClient, Db } from "mongodb";
 
 const options = {};
 
-let clientPromise: Promise<MongoClient> | null = null;
+let clientPromise: Promise<MongoClient> | undefined = undefined;
 
 function getClientPromise(): Promise<MongoClient> {
   if (clientPromise) {
