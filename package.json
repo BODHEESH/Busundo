@@ -14,7 +14,8 @@
     "scrape:ksrtc": "tsx scripts/scrape-ksrtc-working.ts",
     "scrape:busundoin": "tsx scripts/scrape-busundoin.ts",
     "import:ksrtc": "tsx scripts/import-ksrtc-data.ts",
-    "scrape:all": "npm run scrape:ksrtc && npm run import:ksrtc"
+    "scrape:all": "npm run scrape:ksrtc && npm run import:ksrtc",
+    "smoke": "node scripts/smoke-test.mjs"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
