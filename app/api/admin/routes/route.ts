@@ -2,11 +2,15 @@ import { NextResponse } from "next/server";
 import { getDatabase } from "@/lib/mongodb";
 import { bulkCreateRoute } from "@/lib/models-v2";
 import { ObjectId } from "mongodb";
-
-// Temporary admin user ID (replace with actual auth later)
-const ADMIN_USER_ID = new ObjectId();
+import { getSession, isAdmin } from "@/lib/auth";
 
 export async function POST(request: Request) {
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin access required" }, { status: 403 });
+  }
+  const session = await getSession();
+  const adminId = new ObjectId((session!.user as any).id);
+
   try {
     const body = await request.json();
     const { routeId, routeName, district, stops } = body;
@@ -24,7 +28,7 @@ export async function POST(request: Request) {
       routeName,
       district,
       stops,
-      ADMIN_USER_ID
+      adminId
     );
     
     return NextResponse.json({
@@ -41,6 +45,9 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin access required" }, { status: 403 });
+  }
   try {
     const db = await getDatabase();
     const routesCollection = db.collection("routes");

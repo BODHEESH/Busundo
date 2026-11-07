@@ -5,7 +5,7 @@ import { withAuth } from 'next-auth/middleware'
 const protectedPaths = ['/dashboard', '/my-busundo', '/profile']
 
 // Paths that require admin role
-const adminPaths = ['/admin']
+const adminPaths = ['/admin', '/api/admin']
 
 export default withAuth(
   function middleware(req) {
