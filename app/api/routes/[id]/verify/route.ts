@@ -1,22 +1,23 @@
 import { NextResponse } from "next/server";
 import { verifyRoute } from "@/lib/models-v2";
 import { ObjectId } from "mongodb";
-
-// Temporary user ID (replace with actual auth later)
-const TEMP_USER_ID = new ObjectId();
+import { getSession, isAdmin } from "@/lib/auth";
 
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Only admins can verify route data
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin access required" }, { status: 403 });
+  }
+
   try {
     const { id } = await params;
-    
-    // In production, get userId from session
-    // const session = await getServerSession();
-    // const userId = session.user.id;
-    
-    await verifyRoute(id, TEMP_USER_ID);
+    const session = await getSession();
+    const reviewerId = new ObjectId((session!.user as any).id);
+
+    await verifyRoute(id, reviewerId);
 
     return NextResponse.json({
       success: true,

@@ -1,8 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDatabase } from "@/lib/mongodb";
+import { getSession } from "@/lib/auth";
+
+// Max route submissions per user per 24 hours (anti-spam)
+const DAILY_SUBMISSION_LIMIT = 20;
 
 export async function POST(request: NextRequest) {
+  // Login required: points can only be credited to a real account
+  const session = await getSession();
+  if (!session?.user) {
+    return NextResponse.json(
+      { error: "Please sign in to add a route" },
+      { status: 401 }
+    );
+  }
+  const submitterId = (session.user as any).id as string;
+
   try {
+    const db0 = await getDatabase();
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const recentCount = await db0.collection("routes").countDocuments({
+      submittedBy: submitterId,
+      createdAt: { $gte: since },
+    });
+    if (recentCount >= DAILY_SUBMISSION_LIMIT) {
+      return NextResponse.json(
+        { error: "Daily submission limit reached. Try again tomorrow." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const { routeName, district, stops } = body;
 
@@ -41,6 +68,7 @@ export async function POST(request: NextRequest) {
 
     // Process stops - create missing ones
     const createdStopNames: string[] = [];
+    let newStopCount = 0;
     for (const stopName of stopNames) {
       let stop = await stopsCollection.findOne({ stopName });
 
@@ -55,6 +83,7 @@ export async function POST(request: NextRequest) {
           createdAt: new Date(),
         };
         await stopsCollection.insertOne(newStop);
+        newStopCount++;
       }
       createdStopNames.push(stopName);
     }
@@ -69,7 +98,10 @@ export async function POST(request: NextRequest) {
       verified: false,
       verifiedBy: 0,
       createdAt: new Date(),
-      submittedBy: "user", // In future, add actual user ID
+      submittedBy: submitterId,
+      status: "pending", // public only after admin approval
+      newStopCount,
+      pointsAwarded: false,
     };
 
     await routesCollection.insertOne(newRoute);

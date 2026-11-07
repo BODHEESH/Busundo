@@ -1,9 +1,10 @@
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
+import { authOptions } from '@/lib/auth-options';
 
 // Helper to get current session on server
 export async function getSession() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   return session;
 }
 
