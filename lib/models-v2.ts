@@ -257,7 +257,9 @@ export async function findDirectRoutes(fromStop: string, toStop: string) {
 
 export async function findOneChangeRoutes(fromStop: string, toStop: string) {
   const routes = await getRoutesCollectionV2();
-  const allRoutes = await routes.find({}).toArray();
+  const allRoutes = await routes
+    .find({ status: { $nin: ["pending", "rejected"] } })
+    .toArray();
   const fromLower = fromStop.toLowerCase();
   const toLower = toStop.toLowerCase();
 
