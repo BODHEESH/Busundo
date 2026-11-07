@@ -22,7 +22,8 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: function (this: any) {
-      return !this.googleId; // Only required for non-OAuth users
+      // Only required for password accounts (not Google or email-code accounts)
+      return !this.googleId && !this.otpUser;
     },
     select: false
   },
@@ -47,6 +48,10 @@ const UserSchema = new mongoose.Schema({
   emailVerified: {
     type: Date,
     default: null
+  },
+  otpUser: {
+    type: Boolean,
+    default: false // created by email-code sign-in, no password
   },
   lastLoginAt: {
     type: Date,

@@ -28,6 +28,10 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [otpStep, setOtpStep] = useState<"email" | "code">("email")
+  const [otpEmail, setOtpEmail] = useState("")
+  const [otpCode, setOtpCode] = useState("")
+  const [otpBusy, setOtpBusy] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -70,6 +74,54 @@ export default function LoginPage() {
       setError("Something went wrong. Please try again.")
     } finally {
       setLoading(false)
+    }
+  }
+
+  const requestCode = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setOtpBusy(true)
+    setError("")
+    try {
+      const res = await fetch("/api/auth/otp/request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: otpEmail }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error || "Could not send the code")
+        return
+      }
+      setOtpStep("code")
+      toast.success("Code sent. Check your inbox.")
+    } catch {
+      setError("Something went wrong. Please try again.")
+    } finally {
+      setOtpBusy(false)
+    }
+  }
+
+  const verifyCode = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setOtpBusy(true)
+    setError("")
+    try {
+      const result = await signIn("otp", {
+        redirect: false,
+        email: otpEmail,
+        code: otpCode,
+      })
+      if (result?.error) {
+        setError("That code is wrong or has expired.")
+        return
+      }
+      toast.success("Signed in successfully!")
+      router.push(callbackUrl)
+      router.refresh()
+    } catch {
+      setError("Something went wrong. Please try again.")
+    } finally {
+      setOtpBusy(false)
     }
   }
 
@@ -117,9 +169,66 @@ export default function LoginPage() {
                 Continue with Google
               </button>
 
+              <div className="mt-6 space-y-3">
+                <p className="text-sm font-semibold text-gray-700">Sign in with an email code</p>
+                {otpStep === "email" ? (
+                  <form onSubmit={requestCode} className="space-y-3">
+                    <input
+                      type="email"
+                      value={otpEmail}
+                      onChange={(e) => setOtpEmail(e.target.value)}
+                      required
+                      placeholder="you@example.com"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-600 text-gray-900"
+                    />
+                    <button
+                      type="submit"
+                      disabled={otpBusy}
+                      className="w-full bg-blue-600 text-white py-3 px-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
+                    >
+                      {otpBusy ? "Sending..." : "Send code"}
+                    </button>
+                  </form>
+                ) : (
+                  <form onSubmit={verifyCode} className="space-y-3">
+                    <p className="text-xs text-gray-500">
+                      We sent a 6-digit code to {otpEmail}.{" "}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setOtpStep("email")
+                          setOtpCode("")
+                          setError("")
+                        }}
+                        className="text-blue-600 hover:underline"
+                      >
+                        Use a different email
+                      </button>
+                    </p>
+                    <input
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                      maxLength={6}
+                      value={otpCode}
+                      onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ""))}
+                      required
+                      placeholder="123456"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl tracking-widest text-center text-lg focus:outline-none focus:border-blue-600 text-gray-900"
+                    />
+                    <button
+                      type="submit"
+                      disabled={otpBusy || otpCode.length !== 6}
+                      className="w-full bg-blue-600 text-white py-3 px-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
+                    >
+                      {otpBusy ? "Checking..." : "Verify and sign in"}
+                    </button>
+                  </form>
+                )}
+              </div>
+
               <div className="mt-6 flex items-center gap-3">
                 <div className="h-px flex-1 bg-gray-200" />
-                <span className="text-xs text-gray-400 font-medium">OR SIGN IN WITH EMAIL</span>
+                <span className="text-xs text-gray-400 font-medium">OR SIGN IN WITH PASSWORD</span>
                 <div className="h-px flex-1 bg-gray-200" />
               </div>
 
