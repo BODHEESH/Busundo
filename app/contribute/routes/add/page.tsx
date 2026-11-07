@@ -11,6 +11,7 @@ export default function UserAddRoutePage() {
     routeName: "",
     district: "Thrissur",
     stops: "",
+    timingsText: "",
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -38,7 +39,7 @@ export default function UserAddRoutePage() {
           type: "success",
           text: "Route submitted successfully! It will be reviewed by our admin team.",
         });
-        setFormData({ routeName: "", district: "Thrissur", stops: "" });
+        setFormData({ routeName: "", district: "Thrissur", stops: "", timingsText: "" });
       } else {
         setMessage({ type: "error", text: data.error });
       }
@@ -146,6 +147,24 @@ export default function UserAddRoutePage() {
                     {stopCount} {stopCount === 1 ? "stop" : "stops"}
                   </p>
                 </div>
+              </div>
+
+              {/* Departure times (optional) */}
+              <div className="mb-8">
+                <label htmlFor="timingsText" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Departure times from the first stop (optional)
+                </label>
+                <textarea
+                  id="timingsText"
+                  value={formData.timingsText}
+                  onChange={(e) => setFormData({ ...formData, timingsText: e.target.value })}
+                  placeholder={`07:15 weekday\n08:30 daily\n09:00 sunday`}
+                  rows={5}
+                  className="w-full rounded-lg border border-gray-200 px-3 py-2 font-mono text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                />
+                <p className="mt-2 text-xs text-gray-400">
+                  One per line: a time like 08:30, then daily, weekday or sunday (default daily)
+                </p>
               </div>
 
               {/* Info Box */}

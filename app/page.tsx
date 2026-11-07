@@ -24,7 +24,7 @@ export default function Home() {
               <div className="inline-block mb-4">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-sm font-semibold">
                   <Star className="h-4 w-4 text-yellow-300" />
-                  #1 Bus Travel Platform in Kerala
+                  Bus travel for Kerala, built with commuters
                 </span>
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-4 md:mb-6">
@@ -48,7 +48,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-green-400 flex-shrink-0" />
-                  <span className="text-xs md:text-sm">Real-time updates</span>
+                  <span className="text-xs md:text-sm">Community-verified timings</span>
                 </div>
               </div>
               <div className="flex flex-wrap gap-3 md:gap-4">
@@ -66,7 +66,7 @@ export default function Home() {
                 </button> */}
               </div>
               <p className="text-sm text-blue-200 mt-6">
-                Join 10,000+ students already using BusUndo
+                Built for Thrissur commuters. Join the community
               </p>
             </div>
             <div className="relative animate-fade-in-up animation-delay-200 flex justify-center md:justify-end mt-8 md:mt-0">
@@ -138,14 +138,14 @@ export default function Home() {
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Search className="h-7 w-7 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">Real-time Bus Tracking</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">Next Bus Timings</h3>
               <p className="text-gray-600 mb-4">
-                Track your bus in real-time and never miss your ride. Get live updates on bus locations and arrival times.
+                See the next departures from your stop, based on timings that commuters have submitted and admins have reviewed.
               </p>
               <ul className="space-y-2 text-sm text-gray-500">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  Live GPS tracking
+                  Community-verified timings
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
@@ -169,7 +169,7 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-gray-500">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  Save up to 70% on travel
+                  Share rides with fellow commuters
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
@@ -197,7 +197,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  Real-time updates
+                  Route discussions
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-500" />
@@ -236,7 +236,7 @@ export default function Home() {
                     <Clock className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Real-time Updates</h3>
+                    <h3 className="text-xl font-bold mb-2">Reviewed Data</h3>
                     <p className="text-gray-300">Get instant notifications about bus arrivals, delays, and route changes.</p>
                   </div>
                 </div>
@@ -247,7 +247,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2">Safe & Secure</h3>
-                    <p className="text-gray-300">Verified users and secure ride pooling for your peace of mind.</p>
+                    <p className="text-gray-300">Submissions are reviewed by an admin before they go live.</p>
                   </div>
                 </div>
 
@@ -342,8 +342,8 @@ export default function Home() {
               <ul className="space-y-2 text-sm">
                 <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
               </ul>
             </div>
 

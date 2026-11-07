@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
 import { MOCK_USERS, isMockLoginEnabled } from "@/lib/dev-auth";
+import { normalizeEmail, verifyLoginCode } from "@/lib/otp";
 
 const providers: NextAuthOptions["providers"] = [
   CredentialsProvider({
@@ -41,6 +42,49 @@ const providers: NextAuthOptions["providers"] = [
       if (!isValid) {
         return null;
       }
+
+      await User.findByIdAndUpdate(user._id, { lastLoginAt: new Date() });
+
+      return {
+        id: user._id.toString(),
+        email: user.email,
+        name: user.name,
+        image: user.avatar,
+        role: user.role,
+      };
+    },
+  }),
+  // Email one-time code sign-in
+  CredentialsProvider({
+    id: "otp",
+    name: "email-code",
+    credentials: {
+      email: { label: "Email", type: "email" },
+      code: { label: "Code", type: "text" },
+    },
+    async authorize(credentials) {
+      if (!credentials?.email || !credentials?.code) return null;
+
+      const email = normalizeEmail(credentials.email);
+      const ok = await verifyLoginCode(email, credentials.code);
+      if (!ok) return null;
+
+      await dbConnect();
+      let user = await User.findOne({ email });
+      if (!user) {
+        user = await User.create({
+          name: email.split("@")[0],
+          email,
+          otpUser: true,
+          role: "user",
+          emailVerified: new Date(),
+        });
+      } else if (!user.emailVerified) {
+        user.emailVerified = new Date();
+        await user.save();
+      }
+
+      if (user.isActive === false) return null;
 
       await User.findByIdAndUpdate(user._id, { lastLoginAt: new Date() });
 

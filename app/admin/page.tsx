@@ -41,6 +41,19 @@ export default function AdminDashboard() {
           </Link>
 
           <Link
+            href="/admin/review"
+            className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-lg transition-all hover:border-blue-500"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-50 mb-4">
+              <Shield className="h-6 w-6 text-green-600" />
+            </div>
+            <h3 className="font-bold text-lg text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Review Submissions</h3>
+            <p className="text-sm text-gray-600">
+              Approve or reject routes and timings sent by contributors
+            </p>
+          </Link>
+
+          <Link
             href="/admin/routes"
             className="group block rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-lg transition-all hover:border-blue-500"
           >

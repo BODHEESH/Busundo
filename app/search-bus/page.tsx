@@ -16,6 +16,9 @@ interface DirectRoute {
   verified: boolean;
   verifiedBy: number;
   isReturn?: boolean;
+  nextDepartures: string[];
+  timingsCount: number;
+  originStop: string;
 }
 
 interface OneChangeRoute {
@@ -227,6 +230,24 @@ function SearchBusContent() {
                         <span className="text-gray-400 text-xs ml-auto">
                           {route.stopsInBetween} {route.stopsInBetween === 1 ? 'stop' : 'stops'}
                         </span>
+                      </div>
+
+                      {/* Next departures from the origin stop */}
+                      <div className="mt-3 rounded-lg bg-gray-50 px-3 py-2 text-sm">
+                        {route.timingsCount === 0 ? (
+                          <span className="text-gray-500">No departure times added yet</span>
+                        ) : route.nextDepartures.length === 0 ? (
+                          <span className="text-gray-500">No more buses today from {route.originStop}</span>
+                        ) : (
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-gray-500">Next from {route.originStop}:</span>
+                            {route.nextDepartures.map((time) => (
+                              <span key={time} className="rounded-full bg-blue-600 px-2.5 py-0.5 text-xs font-semibold text-white">
+                                {time}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       <details className="mt-2">

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { findDirectRoutes, findOneChangeRoutes } from "@/lib/models-v2";
+import { upcomingDepartures } from "@/lib/timings";
 
 export async function GET(request: Request) {
   try {
@@ -27,6 +28,12 @@ export async function GET(request: Request) {
       from,
       to,
       directRoutes: directRoutes.map(r => ({
+        // Next departures from the origin stop (IST), soonest first
+        nextDepartures: upcomingDepartures((r.route as any).timings),
+        timingsCount: Array.isArray((r.route as any).timings)
+          ? (r.route as any).timings.length
+          : 0,
+        originStop: r.route.stops[0],
         routeId: r.route.routeId,
         routeName: r.route.routeName,
         boardAt: r.boardAt,
