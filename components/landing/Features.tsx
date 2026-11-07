@@ -14,7 +14,7 @@ const features = [
   },
   {
     icon: Bell,
-    title: "Real-time Updates",
+    title: "Reviewed Updates",
     description: "Get notified when friends join your group or when travel status changes."
   },
   {
