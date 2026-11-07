@@ -215,8 +215,12 @@ export async function findDirectRoutes(fromStop: string, toStop: string) {
   const fromLower = fromStop.toLowerCase();
   const toLower = toStop.toLowerCase();
 
-  // Fetch all routes and do partial case-insensitive matching
-  const allRoutes = await routes.find({}).toArray();
+  // Hide user submissions until an admin approves or rejects them.
+  // Seeded routes have no status field, so they remain visible.
+  // (Still loads all routes; add a DB-side stop index before large scale.)
+  const allRoutes = await routes
+    .find({ status: { $nin: ["pending", "rejected"] } })
+    .toArray();
 
   const validRoutes = allRoutes.filter((route) => {
     const fromIndex = route.stops.findIndex((s: string) =>
